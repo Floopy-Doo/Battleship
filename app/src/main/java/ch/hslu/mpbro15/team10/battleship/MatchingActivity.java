@@ -43,14 +43,14 @@ import ch.hslu.mpbro15.team10.battleship.BaseGame.BaseGameUtils;
  */
 public class MatchingActivity extends Activity
         implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener, RealTimeMessageReceivedListener,
-        RoomStatusUpdateListener, RoomUpdateListener, OnInvitationReceivedListener  {
+        RealTimeMessageReceivedListener, RoomStatusUpdateListener, RoomUpdateListener,
+        OnInvitationReceivedListener {
         /*
      * API INTEGRATION SECTION. This section contains the code that integrates
      * the game with the Google Play game services API.
      */
 
-    final static String TAG = "ButtonClicker2000";
+    final static String TAG = "MOBPRO15_BattleShip";
 
     // Request codes for the UIs that we show with startActivityForResult:
     final static int RC_SELECT_PLAYERS = 10000;
@@ -108,64 +108,9 @@ public class MatchingActivity extends Activity
 
         // set up a click listener for everything we care about
         for (int id : CLICKABLES) {
-            findViewById(id).setOnClickListener(this);
+            findViewById(id).setOnClickListener(new ClickHandler());
         }
     }
-
-    @Override
-    public void onClick(View v) {
-        Intent intent;
-
-        switch (v.getId()) {
-            case R.id.button_sign_in:
-                // user wants to sign in
-                // Check to see the developer who's running this sample code read the instructions :-)
-                // NOTE: this check is here only because this is a sample! Don't include this
-                // check in your actual production app.
-                if (!BaseGameUtils.verifySampleSetup(this, R.string.app_id)) {
-                    Log.w(TAG, "*** Warning: setup problems detected. Sign in may not work!");
-                }
-
-                // start the sign-in flow
-                Log.d(TAG, "Sign-in button clicked");
-                mSignInClicked = true;
-                mGoogleApiClient.connect();
-                break;
-            case R.id.button_sign_out:
-                // user wants to sign out
-                // sign out.
-                Log.d(TAG, "Sign-out button clicked");
-                mSignInClicked = false;
-                Games.signOut(mGoogleApiClient);
-                mGoogleApiClient.disconnect();
-                switchToScreen(R.id.screen_sign_in);
-                break;
-            case R.id.button_invite_players:
-                // show list of invitable players
-                intent = Games.RealTimeMultiplayer.getSelectOpponentsIntent(mGoogleApiClient, 1, 1);
-                switchToScreen(R.id.screen_wait);
-                startActivityForResult(intent, RC_SELECT_PLAYERS);
-                break;
-            case R.id.button_see_invitations:
-                // show list of pending invitations
-                intent = Games.Invitations.getInvitationInboxIntent(mGoogleApiClient);
-                switchToScreen(R.id.screen_wait);
-                startActivityForResult(intent, RC_INVITATION_INBOX);
-                break;
-            case R.id.button_accept_popup_invitation:
-                // user wants to accept the invitation shown on the invitation popup
-                // (the one we got through the OnInvitationReceivedListener).
-                acceptInviteToRoom(mIncomingInvitationId);
-                mIncomingInvitationId = null;
-                break;
-            case R.id.button_click_me:
-                // (gameplay) user clicked the "click me" button
-                scoreOnePoint();
-                break;
-        }
-    }
-
-
 
     @Override
     public void onActivityResult(int requestCode, int responseCode,
@@ -206,11 +151,72 @@ public class MatchingActivity extends Activity
                 if (responseCode == RESULT_OK) {
                     mGoogleApiClient.connect();
                 } else {
-                    BaseGameUtils.showActivityResultError(this,requestCode,responseCode, R.string.signin_other_error);
+                    BaseGameUtils.showActivityResultError(this, requestCode, responseCode, R.string.signin_other_error);
                 }
                 break;
         }
         super.onActivityResult(requestCode, responseCode, intent);
+    }
+
+    private class ClickHandler implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.button_sign_in:
+                    buttonSignInClick();
+                    break;
+                case R.id.button_sign_out:
+                    buttonSignOutClick();
+                    break;
+                case R.id.button_invite_players:
+                    buttonInvitePlayerClick();
+                    break;
+                case R.id.button_see_invitations:
+                    buttonSeeInvitationsClick();
+                    break;
+                case R.id.button_accept_popup_invitation:
+                    buttonAcceptPopupInviteClick();
+                    break;
+            }
+        }
+
+        private void buttonAcceptPopupInviteClick() {
+            // user wants to accept the invitation shown on the invitation popup
+            // (the one we got through the OnInvitationReceivedListener).
+            acceptInviteToRoom(mIncomingInvitationId);
+            mIncomingInvitationId = null;
+        }
+
+        private void buttonSeeInvitationsClick() {
+            Intent intent;// show list of pending invitations
+            intent = Games.Invitations.getInvitationInboxIntent(mGoogleApiClient);
+            switchToScreen(R.id.screen_wait);
+            startActivityForResult(intent, RC_INVITATION_INBOX);
+        }
+
+        private void buttonInvitePlayerClick() {
+            Intent intent;// show list of invitable players
+            intent = Games.RealTimeMultiplayer.getSelectOpponentsIntent(mGoogleApiClient, 1, 1);
+            switchToScreen(R.id.screen_wait);
+            startActivityForResult(intent, RC_SELECT_PLAYERS);
+        }
+
+        private void buttonSignOutClick() {
+            // user wants to sign out
+            // sign out.
+            Log.d(TAG, "Sign-out button clicked");
+            mSignInClicked = false;
+            Games.signOut(mGoogleApiClient);
+            mGoogleApiClient.disconnect();
+            switchToScreen(R.id.screen_sign_in);
+        }
+
+        private void buttonSignInClick() {
+            // start the sign-in flow
+            Log.d(TAG, "Sign-in button clicked");
+            mSignInClicked = true;
+            mGoogleApiClient.connect();
+        }
     }
 
     // Handle the result of the "Select players UI" we launched when the user clicked the
@@ -295,10 +301,9 @@ public class MatchingActivity extends Activity
         // stop trying to keep the screen on
         stopKeepingScreenOn();
 
-        if (mGoogleApiClient == null || !mGoogleApiClient.isConnected()){
+        if (mGoogleApiClient == null || !mGoogleApiClient.isConnected()) {
             switchToScreen(R.id.screen_sign_in);
-        }
-        else {
+        } else {
             switchToScreen(R.id.screen_wait);
         }
         super.onStop();
@@ -315,7 +320,7 @@ public class MatchingActivity extends Activity
             Log.w(TAG,
                     "GameHelper: client was already connected on onStart()");
         } else {
-            Log.d(TAG,"Connecting client.");
+            Log.d(TAG, "Connecting client.");
             mGoogleApiClient.connect();
         }
         super.onStart();
@@ -400,7 +405,7 @@ public class MatchingActivity extends Activity
                     .getParcelable(Multiplayer.EXTRA_INVITATION);
             if (inv != null && inv.getInvitationId() != null) {
                 // retrieve and cache the invitation ID
-                Log.d(TAG,"onConnected: connection hint has a room invite!");
+                Log.d(TAG, "onConnected: connection hint has a room invite!");
                 acceptInviteToRoom(inv.getInvitationId());
                 return;
             }
@@ -647,10 +652,10 @@ public class MatchingActivity extends Activity
 
     // Score of other participants. We update this as we receive their scores
     // from the network.
-    Map<String, Integer> mParticipantScore = new HashMap<String, Integer>();
+    Map<String, Integer> mParticipantScore = new HashMap<>();
 
     // Participants who sent us their final score.
-    Set<String> mFinishedParticipants = new HashSet<String>();
+    Set<String> mFinishedParticipants = new HashSet<>();
 
     // Called when we receive a real-time message from the network.
     // Messages in our game are made up of 2 bytes: the first one is 'F' or 'U'
@@ -728,7 +733,7 @@ public class MatchingActivity extends Activity
     // This array lists everything that's clickable, so we can install click
     // event handlers.
     final static int[] CLICKABLES = {
-            R.id.button_accept_popup_invitation, R.id.button_invite_players,R.id.button_see_invitations, R.id.button_sign_in,
+            R.id.button_accept_popup_invitation, R.id.button_invite_players, R.id.button_see_invitations, R.id.button_sign_in,
             R.id.button_sign_out, R.id.button_click_me
     };
 
@@ -764,8 +769,7 @@ public class MatchingActivity extends Activity
     void switchToMainScreen() {
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             switchToScreen(R.id.screen_main);
-        }
-        else {
+        } else {
             switchToScreen(R.id.screen_sign_in);
         }
     }
