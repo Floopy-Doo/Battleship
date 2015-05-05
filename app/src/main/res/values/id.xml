@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_id">55458908303</string>
+    <string name="achievement_firstwin">CgkIj5HvzM4BEAIQAQ</string>
+    <string name="achievement_firstshotfirsthit">CgkIj5HvzM4BEAIQAg</string>
+    <string name="achievement_lucky6">CgkIj5HvzM4BEAIQAw</string>
+    <string name="achievement_lucky7">CgkIj5HvzM4BEAIQBA</string>
+    <string name="achievement_masterofdisguise">CgkIj5HvzM4BEAIQBQ</string>
+    <string name="leaderboard_id">CgkIj5HvzM4BEAIQBg</string>
+</resources>
