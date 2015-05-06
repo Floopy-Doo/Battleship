@@ -14,6 +14,9 @@
     <color name="Game_Hit">#ffcc0000</color>
     <color name="Game_Miss">#ff14004a</color>
 
+    <color name="opponentReady">#ff07c426</color>
+    <color name="opponentNotReady">#ffec0000</color>
+
     <dimen name="TitleSize">30sp</dimen>
 
     <style name="AppTheme" parent="android:Theme.Light.NoTitleBar.Fullscreen" />
@@ -185,6 +188,10 @@
         <item name="android:textColor">@color/AccentColor</item>
         <item name="android:textSize">20sp</item>
         <item name="android:layout_marginBottom">20dp</item>
+    </style>
+
+    <style name="GooglePlayBlurb" parent="Blurb">
+        <item name="android:text">@string/GooglePlayBlurb</item>
     </style>
 
 

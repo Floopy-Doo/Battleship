@@ -35,6 +35,14 @@
             android:name=".HighscoreActivity"
             android:label="@string/title_activity_highscore" >
         </activity>
+        <activity
+            android:name=".GameSetupActivity"
+            android:label="@string/title_activity_game_setup" >
+        </activity>
+        <activity
+            android:name=".GameActivity"
+            android:label="@string/title_activity_game" >
+        </activity>
     </application>
 
 </manifest>

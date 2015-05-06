@@ -49,4 +49,9 @@
     <string name="title_activity_highscore">High scores</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="opponentStatus">Opponent ready</string>
+    <string name="turnYou">Your turn</string>
+    <string name="GooglePlayBlurb">GooglePlay is required to play this game in mulitplayer.</string>
+    <string name="title_activity_game_setup">GameSetupActivity</string>
+    <string name="title_activity_game">GameActivity</string>
 </resources>
