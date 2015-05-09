@@ -29,12 +29,12 @@ import com.google.android.gms.plus.Plus;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.hslu.mpbro15.team10.battleship.GooglePlayBaseGame.BaseGameUtils;
 import ch.hslu.mpbro15.team10.battleship.R;
 import ch.hslu.mpbro15.team10.battleship.basegame.BaseMultiplayerAcitvity;
 import ch.hslu.mpbro15.team10.battleship.fragments.MultiplayerSignInFragment;
 import ch.hslu.mpbro15.team10.battleship.fragments.MultiplayerSignedInFragment;
 import ch.hslu.mpbro15.team10.battleship.fragments.OnFragmentInteractionListener;
+import ch.hslu.mpbro15.team10.battleship.googleplaybasegame.BaseGameUtils;
 
 public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFragmentInteractionListener {
 

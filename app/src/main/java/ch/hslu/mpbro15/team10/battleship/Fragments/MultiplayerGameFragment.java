@@ -7,56 +7,43 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.common.SignInButton;
-
 import ch.hslu.mpbro15.team10.battleship.R;
-import ch.hslu.mpbro15.team10.battleship.activities.MultiplayerActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MultiplayerSignInFragment#newInstance} factory method to
+ * Use the {@link MultiplayerGameFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MultiplayerSignInFragment extends Fragment {
-
+public class MultiplayerGameFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment MultiplayerFragment.
+     * @return A new instance of fragment GameFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static MultiplayerSignInFragment newInstance() {
-        MultiplayerSignInFragment fragment = new MultiplayerSignInFragment();
+    public static MultiplayerGameFragment newInstance() {
+        MultiplayerGameFragment fragment = new MultiplayerGameFragment();
         return fragment;
     }
 
-    public MultiplayerSignInFragment() {
+    public MultiplayerGameFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_signin, container, false);
-
-        SignInButton btnSignIn = (SignInButton) view.findViewById(R.id.button_sign_in);
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (getActivity() != null) {
-                    MultiplayerActivity activity = (MultiplayerActivity) getActivity();
-                    activity.playConManager.signIn();
-                }
-            }
-        });
-
-
+        View view = inflater.inflate(R.layout.fragment_game, container, false);
         return view;
     }
 

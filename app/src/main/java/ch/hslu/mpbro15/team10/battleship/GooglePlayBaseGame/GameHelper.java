@@ -1,4 +1,4 @@
-package ch.hslu.mpbro15.team10.battleship.GooglePlayBaseGame;
+package ch.hslu.mpbro15.team10.battleship.googleplaybasegame;
 
 import java.util.ArrayList;
 

@@ -1,35 +1,29 @@
 package ch.hslu.mpbro15.team10.battleship.basegame;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.support.v4.app.FragmentActivity;
 import android.view.WindowManager;
-
-import com.google.android.gms.common.api.GoogleApiClient;
 
 /**
  * Base class for all activities dedicated to multiplayer
  * Created by Floopy-Doo on 09.05.2015.
  */
 public abstract class BaseMultiplayerAcitvity extends FragmentActivity {
-    /**
-     * TAG for Logging
-     */
-    public final static String TAG = "MOBPRO15_BattleShip";
 
-    /***
+    /**
      * Request codes for single pages
      */
-    public final static int RC_SIGN_IN              = 9000001;
-    public final static int RC_SEE_INVITATIONS      = 9000002;
-    public final static int RC_PLAYER_INVITATION    = 9000003;
-    public final static int RC_WAITING_ROOM         = 9000004;
+    public final static int RC_SIGN_IN = 9000001;
+    public final static int RC_SEE_INVITATIONS = 9000002;
+    public final static int RC_PLAYER_INVITATION = 9000003;
+    public final static int RC_WAITING_ROOM = 9000004;
 
     private Dialog currentDisplayedWaitDialog;
 
     /**
      * Displays a AlertDialog without controls just for the waiting display.
+     *
      * @param message the displayed message
      */
     protected void displayWaitingDialog(String message) {
