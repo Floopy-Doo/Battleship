@@ -1,11 +1,13 @@
 package ch.hslu.mpbro15.team10.battleship.activities;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -31,9 +33,12 @@ import java.util.List;
 
 import ch.hslu.mpbro15.team10.battleship.R;
 import ch.hslu.mpbro15.team10.battleship.basegame.BaseMultiplayerAcitvity;
+import ch.hslu.mpbro15.team10.battleship.fragments.MultiplayerGameFragment;
+import ch.hslu.mpbro15.team10.battleship.fragments.MultiplayerGameSetupFragment;
 import ch.hslu.mpbro15.team10.battleship.fragments.MultiplayerSignInFragment;
 import ch.hslu.mpbro15.team10.battleship.fragments.MultiplayerSignedInFragment;
 import ch.hslu.mpbro15.team10.battleship.fragments.OnFragmentInteractionListener;
+import ch.hslu.mpbro15.team10.battleship.fragments.WaitingFragment;
 import ch.hslu.mpbro15.team10.battleship.googleplaybasegame.BaseGameUtils;
 
 public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFragmentInteractionListener {
@@ -75,6 +80,45 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
     }
 
     @Override
+    public void onStart() {
+        if (playConManager.isConnected()) {
+            showSignedInFragment();
+        } else if (playConManager.client != null) {
+            showWaitingFragment();
+            playConManager.client.connect();
+        }
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        playRoomManager.leaveRoom();
+        disableKeepScreenOn();
+
+        if (playConManager.isConnected()) {
+            showSignedInFragment();
+        } else {
+            showWaitingFragment();
+        }
+        super.onStop();
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent e) {
+        Fragment frag = getFragmentManager().findFragmentById(R.id.container);
+
+        boolean isGameScreen = frag instanceof MultiplayerGameFragment;
+        isGameScreen |= frag instanceof MultiplayerGameSetupFragment;
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && isGameScreen) {
+            playRoomManager.leaveRoom();
+            return true;
+        }
+        return super.onKeyDown(keyCode, e);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -104,10 +148,10 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-
         playRoomManager.leaveRoom();
         playConManager.close();
+
+        super.onDestroy();
     }
 
     @Override
@@ -133,9 +177,15 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
     protected void showGameFragment() {
     }
 
+    protected void showWaitingFragment() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, WaitingFragment.newInstance())
+                .commit();
+    }
+
     protected void showInvitation(String playerName) {
         ((TextView) findViewById(R.id.incoming_invitation_text))
-                .setText(String.format("{0} {1}", playerName, getString(R.string.is_inviting_you)));
+                .setText(String.format("%s %s", playerName, getString(R.string.is_inviting_you)));
         findViewById(R.id.invitation_popup)
                 .setVisibility(View.VISIBLE);
     }
@@ -204,7 +254,7 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
         @Override
         public void onConnectionSuspended(int i) {
             Log.d(this.getClass().getName(),
-                    String.format("Connection suspended. ClientPresent:{0}", client != null));
+                    String.format("Connection suspended. ClientPresent:%s", client != null));
             // reconnect if possible
             if (client != null) {
                 client.connect();
@@ -214,6 +264,8 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
         @Override
         public void onConnectionFailed(ConnectionResult connectionResult) {
             Log.d(this.getClass().getName(), "Connecting to GooglePlay failed");
+            MultiplayerActivity.this.showWaitingFragment();
+
             BaseGameUtils.resolveConnectionFailure(
                     MultiplayerActivity.this,
                     client,
@@ -321,7 +373,6 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
             if (currentRoom != null) {
                 Games.RealTimeMultiplayer.leave(connectionManager.client, this, currentRoom.getRoomId());
             }
-            MultiplayerActivity.this.showSignedInFragment();
         }
 
         @Override
@@ -362,7 +413,7 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
             roomParticipiants = room.getParticipants();
 
             Log.d(this.getClass().getName(), String.format(
-                    "Connected to Room. RoomID:{0}, PlayerID:{1}"
+                    "Connected to Room. RoomID:%s, PlayerID:%s"
                     , room.getRoomId()
                     , currentPlayerID));
         }
