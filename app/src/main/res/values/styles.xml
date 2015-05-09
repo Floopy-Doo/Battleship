@@ -1,6 +1,7 @@
 <resources>
 
     <color name="AccentColor">#cc0000</color>
+    <color name="AccentColorDisabled">#7746001d</color>
     <color name="PopupColor">@color/AccentColor</color>
     <color name="PopupTextColor">#ffffff</color>
     <color name="ButtonTextColor">#ffffff</color>
@@ -25,7 +26,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
-        <item name="android:visibility">gone</item>
+        <item name="android:visibility">visible</item>
+        <item name="android:background">@drawable/battleship_bg</item>
     </style>
 
     <style name="LLScreen" parent="@style/GameScreen">
@@ -53,10 +55,13 @@
     <style name="GameTitle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">90dp</item>
+        <item name="android:layout_marginBottom">40dp</item>
         <item name="android:text">@string/game_title</item>
         <item name="android:textColor">@color/AccentColor</item>
         <item name="android:textSize">@dimen/TitleSize</item>
-        <item name="android:layout_marginBottom">40dp</item>
     </style>
 
     <style name="Blurb">
@@ -70,24 +75,6 @@
         <item name="android:layout_marginBottom">40dp</item>
     </style>
 
-    <style name="SignInButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">40dp</item>
-    </style>
-
-    <style name="GameButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/AccentColor</item>
-        <item name="android:textColor">@color/ButtonTextColor</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingRight">10dp</item>
-    </style>
-
-    <style name="MainScreenButton" parent="@style/GameButton">
-        <item name="android:layout_marginBottom">10dp</item>
-    </style>
 
     <style name="MainScreenButtonBlurb" parent="@style/GameBlurb">
         <item name="android:layout_marginBottom">20dp</item>
@@ -107,10 +94,6 @@
         <item name="android:textColor">@color/AccentColor</item>
     </style>
 
-    <style name="SignOutButton" parent="@style/GameButton">
-        <item name="android:background">@color/SignOutButtonBackground</item>
-        <item name="android:textColor">@color/SignOutButtonTextColor</item>
-    </style>
 
     <style name="FigureView">
         <item name="android:layout_width">150dp</item>
@@ -193,6 +176,61 @@
     <style name="GooglePlayBlurb" parent="Blurb">
         <item name="android:text">@string/GooglePlayBlurb</item>
     </style>
+
+    <style name="BaseActivity">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:background">@drawable/battleship_bg</item>
+    </style>
+
+    <style name="BaseButton">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+    </style>
+
+    <style name="MainScreenButton" parent="@style/BaseButton">
+        <item name="android:background">@color/AccentColor</item>
+        <item name="android:textColor">@color/ButtonTextColor</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="MainScreenButtonDisabled" parent="@style/BaseButton">
+        <item name="android:background">@color/AccentColorDisabled</item>
+        <item name="android:textColor">@color/ButtonTextColor</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+
+    <style name="GameButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/AccentColor</item>
+        <item name="android:textColor">@color/ButtonTextColor</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+    </style>
+
+    <style name="SignOutButton" parent="@style/BaseButton">
+        <item name="android:background">@color/SignOutButtonBackground</item>
+        <item name="android:textColor">@color/SignOutButtonTextColor</item>
+    </style>
+
+    <style name="SignInButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">40dp</item>
+    </style>
+
 
 
 </resources>

@@ -1,25 +1,26 @@
-package ch.hslu.mpbro15.team10.battleship;
+package ch.hslu.mpbro15.team10.battleship.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import ch.hslu.mpbro15.team10.battleship.GooglePlayBaseGame.BaseGameActivity;
+import ch.hslu.mpbro15.team10.battleship.R;
 
 
-public class GameSetupActivity extends BaseGameActivity {
+public class HighscoreActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_setup);
+        setContentView(R.layout.activity_highscore);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_game_setup, menu);
+        getMenuInflater().inflate(R.menu.menu_highscore, menu);
         return true;
     }
 
@@ -36,15 +37,5 @@ public class GameSetupActivity extends BaseGameActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onSignInFailed() {
-        this.showAlert("Failed connecting to GooglePlay!");
-    }
-
-    @Override
-    public void onSignInSucceeded() {
-
     }
 }

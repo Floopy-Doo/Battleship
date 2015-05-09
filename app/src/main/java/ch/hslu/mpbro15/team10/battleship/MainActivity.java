@@ -8,6 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import ch.hslu.mpbro15.team10.battleship.activities.HighscoreActivity;
+import ch.hslu.mpbro15.team10.battleship.activities.MultiplayerActivity;
+
 
 public class MainActivity extends Activity {
 
@@ -20,7 +23,7 @@ public class MainActivity extends Activity {
         openMulitplayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MatchingActivity.class);
+                Intent intent = new Intent(MainActivity.this, MultiplayerActivity.class);
                 startActivity(intent);
             }
         });

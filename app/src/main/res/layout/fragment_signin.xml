@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/BaseActivity"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="ch.hslu.mpbro15.team10.battleship.fragments.MultiplayerSignInFragment">
+
+    <TextView style="@style/GameTitle" />
+
+    <TextView style="@style/GameBlurb" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/button_sign_in"
+        style="@style/SignInButton" />
+
+    <TextView style="@style/GooglePlayBlurb" />
+</LinearLayout>

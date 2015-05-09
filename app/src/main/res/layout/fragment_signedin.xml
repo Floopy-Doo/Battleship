@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/BaseActivity"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="ch.hslu.mpbro15.team10.battleship.fragments.MultiplayerSignedInFragment"
+    >
+
+    <TextView style="@style/GameTitle" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button_invite_players"
+            style="@style/MainScreenButton"
+            android:text="@string/invite_players" />
+
+        <TextView
+            style="@style/MainScreenButtonBlurb"
+            android:text="@string/invite_players_explanation" />
+
+        <Button
+            android:id="@+id/button_see_invitations"
+            style="@style/MainScreenButton"
+            android:text="@string/see_invitations" />
+
+        <TextView
+            style="@style/MainScreenButtonBlurb"
+            android:text="@string/see_invitations_explanation" />
+
+        <Button
+            android:id="@+id/button_sign_out"
+            style="@style/SignOutButton"
+            android:text="@string/sign_out" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="ch.hslu.mpbro15.team10.battleship.activities.MultiplayerActivity"
+        tools:ignore="MergeRootFrame">
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/invitation_popup"
+        style="@style/InvPopup">
+
+        <TextView
+            android:id="@+id/incoming_invitation_text"
+            style="@style/InvPopupText" />
+
+        <Button
+            android:id="@+id/button_accept_popup_invitation"
+            style="@style/InvPopupButton"
+            android:text="@string/accept_popup_invite" />
+    </LinearLayout>
+</RelativeLayout>

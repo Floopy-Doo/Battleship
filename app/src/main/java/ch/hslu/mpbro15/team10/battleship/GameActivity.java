@@ -1,11 +1,10 @@
 package ch.hslu.mpbro15.team10.battleship;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import ch.hslu.mpbro15.team10.battleship.BaseGame.BaseGameActivity;
+import ch.hslu.mpbro15.team10.battleship.GooglePlayBaseGame.BaseGameActivity;
 
 
 public class GameActivity extends BaseGameActivity {
