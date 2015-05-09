@@ -4,55 +4,53 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="ch.hslu.mpbro15.team10.battleship.GameSetupActivity"
+    tools:context="ch.hslu.mpbro15.team10.battleship.fragments.MultiplayerGameFragment"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-    android:weightSum="1"
-    android:background="@drawable/battleship_bg" >
+    android:layout_height="match_parent"
+    android:background="@drawable/battleship_bg">
+
 
     <TextView
-        android:id="@+id/txvOpponentGridStatus"
+        android:id="@+id/gameStatus"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="@string/opponentStatus"
+        android:text="@string/turnYou"
         android:textColor="@color/opponentReady"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="10dp"
         android:gravity="center" />
 
     <LinearLayout
-        android:id="@+id/llFieldGrid"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:weightSum="1"
-        android:layout_above="@+id/btnReady"
-        android:layout_below="@+id/txvOpponentGridStatus">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Place your ships"
-            android:id="@+id/textView2"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="5dp"/>
+        android:layout_above="@+id/btnShoot"
+        android:layout_below="@+id/gameStatus">
 
         <include
             android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_height="280dp"
             layout="@layout/gamegrid"
             android:layout_centerInParent="true"
             android:id="@+id/gridOpponent"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp" />
 
-
+        <include
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            layout="@layout/gamegrid"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/gridYou"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/multiplayer_ready"
-        android:id="@+id/btnReady"
-        android:layout_alignParentBottom="true" />
-
+        android:text="Shoot!"
+        android:id="@+id/btnShoot"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5dp" />
 </RelativeLayout>

@@ -7,6 +7,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         tools:context="ch.hslu.mpbro15.team10.battleship.activities.MultiplayerActivity"
         tools:ignore="MergeRootFrame">
 
@@ -15,6 +16,7 @@
 
     <LinearLayout
         android:id="@+id/invitation_popup"
+        android:visibility="gone"
         style="@style/InvPopup">
 
         <TextView

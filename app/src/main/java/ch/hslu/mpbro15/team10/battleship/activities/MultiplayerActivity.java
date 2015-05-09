@@ -1,16 +1,12 @@
 package ch.hslu.mpbro15.team10.battleship.activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -33,11 +29,11 @@ import com.google.android.gms.plus.Plus;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.hslu.mpbro15.team10.battleship.GooglePlayBaseGame.BaseGameUtils;
+import ch.hslu.mpbro15.team10.battleship.R;
 import ch.hslu.mpbro15.team10.battleship.basegame.BaseMultiplayerAcitvity;
 import ch.hslu.mpbro15.team10.battleship.fragments.MultiplayerSignInFragment;
 import ch.hslu.mpbro15.team10.battleship.fragments.MultiplayerSignedInFragment;
-import ch.hslu.mpbro15.team10.battleship.GooglePlayBaseGame.BaseGameUtils;
-import ch.hslu.mpbro15.team10.battleship.R;
 import ch.hslu.mpbro15.team10.battleship.fragments.OnFragmentInteractionListener;
 
 public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFragmentInteractionListener {
@@ -68,7 +64,7 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
                 .addApi(Games.API).addScope(Games.SCOPE_GAMES)      //google games
                 .build();
 
-        ((Button) findViewById(R.id.button_accept_popup_invitation))
+        findViewById(R.id.button_accept_popup_invitation)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -97,7 +93,7 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
             playRoomManager.acceptInvite(inv.getInvitationId());
         } else if (requestCode == RC_WAITING_ROOM && resultCode == RESULT_OK) {
             // ready to start playing
-            Log.d(TAG, "Starting game (waiting room returned OK).");
+            Log.d(this.getClass().getName(), "Starting game (waiting room returned OK).");
             perpareForGameStart();
         } else if (requestCode == RC_WAITING_ROOM &&
                 (resultCode == GamesActivityResultCodes.RESULT_LEFT_ROOM || resultCode == RESULT_CANCELED)) {
@@ -140,12 +136,12 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
     protected void showInvitation(String playerName) {
         ((TextView) findViewById(R.id.incoming_invitation_text))
                 .setText(String.format("{0} {1}", playerName, getString(R.string.is_inviting_you)));
-        ((LinearLayout) findViewById(R.id.invitation_popup))
+        findViewById(R.id.invitation_popup)
                 .setVisibility(View.VISIBLE);
     }
 
     protected void dismissInvitation() {
-        ((LinearLayout) findViewById(R.id.invitation_popup))
+        findViewById(R.id.invitation_popup)
                 .setVisibility(View.GONE);
     }
 
@@ -158,7 +154,6 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
             GoogleApiClient.OnConnectionFailedListener {
 
         public GoogleApiClient client;
-        private boolean resolvingConnationFailed = false;
 
         public boolean isConnected() {
             return client != null && client.isConnected();
