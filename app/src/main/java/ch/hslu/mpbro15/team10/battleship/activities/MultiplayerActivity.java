@@ -318,7 +318,9 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
         }
 
         public void leaveRoom() {
-            Games.RealTimeMultiplayer.leave(connectionManager.client, this, currentRoom.getRoomId());
+            if (currentRoom != null) {
+                Games.RealTimeMultiplayer.leave(connectionManager.client, this, currentRoom.getRoomId());
+            }
             MultiplayerActivity.this.showSignedInFragment();
         }
 

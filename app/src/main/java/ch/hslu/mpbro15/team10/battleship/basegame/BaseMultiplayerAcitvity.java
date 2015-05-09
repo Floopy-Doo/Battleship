@@ -14,10 +14,10 @@ public abstract class BaseMultiplayerAcitvity extends FragmentActivity {
     /**
      * Request codes for single pages
      */
-    public final static int RC_SIGN_IN = 9000001;
-    public final static int RC_SEE_INVITATIONS = 9000002;
-    public final static int RC_PLAYER_INVITATION = 9000003;
-    public final static int RC_WAITING_ROOM = 9000004;
+    public final static int RC_SIGN_IN = 9001;
+    public final static int RC_SEE_INVITATIONS = 9002;
+    public final static int RC_PLAYER_INVITATION = 9003;
+    public final static int RC_WAITING_ROOM = 9004;
 
     private Dialog currentDisplayedWaitDialog;
 
