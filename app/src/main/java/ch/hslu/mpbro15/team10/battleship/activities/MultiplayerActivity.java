@@ -27,7 +27,10 @@ import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
 import com.google.android.gms.plus.Plus;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 import ch.hslu.mpbro15.team10.battleship.R;
 import ch.hslu.mpbro15.team10.battleship.basegame.BaseMultiplayerAcitvity;
@@ -35,6 +38,8 @@ import ch.hslu.mpbro15.team10.battleship.fragments.MultiplayerSignInFragment;
 import ch.hslu.mpbro15.team10.battleship.fragments.MultiplayerSignedInFragment;
 import ch.hslu.mpbro15.team10.battleship.fragments.OnFragmentInteractionListener;
 import ch.hslu.mpbro15.team10.battleship.googleplaybasegame.BaseGameUtils;
+import ch.hslu.mpbro15.team10.battleship.utility.ByteTransferObjectCoder;
+import ch.hslu.mpbro15.team10.battleship.utility.TransferObject;
 
 public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFragmentInteractionListener {
 
@@ -146,6 +151,32 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
     }
 
     private void perpareForGameStart() {
+        Collections.sort(playRoomManager.roomParticipiants, new Comparator<Participant>() {
+            @Override
+            public int compare(Participant lhs, Participant rhs) {
+                return lhs.getParticipantId().compareTo(rhs.getParticipantId());
+            }
+        });
+        if(playRoomManager.roomParticipiants.get(0).equals(playRoomManager.currentPlayerID))
+        {
+            Random rn = new Random();
+            int startingPlayersIndex = rn.nextInt(2);
+
+            TransferObject transferObject = new TransferObject("StartingPlayer",playRoomManager.roomParticipiants.get(startingPlayersIndex).getParticipantId());
+
+            byte[] buffer = ByteTransferObjectCoder.encodeTransferObject(transferObject);
+
+            for (Participant p : playRoomManager.roomParticipiants) {
+                if (p.getParticipantId().equals(playRoomManager.currentPlayerID))
+                    continue;
+                if (p.getStatus() != Participant.STATUS_JOINED)
+                    continue;
+
+                Games.RealTimeMultiplayer.sendReliableMessage(playConManager.client, null, buffer, playRoomManager.currentRoom.getRoomId(),p.getParticipantId());
+            }
+        }
+
+
         showGameSetupFragment();
     }
 
