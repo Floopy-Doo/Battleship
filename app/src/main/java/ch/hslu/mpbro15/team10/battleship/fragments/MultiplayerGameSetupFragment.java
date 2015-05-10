@@ -601,6 +601,13 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
 
                     shipParts= list;
 
+                    List<TextView> shipTextviews = new ArrayList<>();
+                    for(BattleshipGameObject bsgo:shipParts)
+                    {
+                        int idResource = mView.getResources().getIdentifier("grid" + bsgo.getCoordinates() , "id", "ch.hslu.mpbro15.team10.battleship");
+                        shipTextviews.add((TextView)mView.findViewById(idResource));
+                    }
+
                 }
                 if(view.getTag() instanceof GOCarrier)
                 {
@@ -735,7 +742,7 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
                     return false;
                 }
 
-                View.DragShadowBuilder shadowBuilder = new MyShadowBuilder(view, new Point(view.getHeight()/2,view.getHeight()/2));
+                View.DragShadowBuilder shadowBuilder = new MyShadowBuilder(shadow, new Point(view.getHeight()/2,view.getHeight()/2));
                 view.startDrag(data, shadowBuilder, view,0);
                 //view.setVisibility(View.INVISIBLE);
                 return true;

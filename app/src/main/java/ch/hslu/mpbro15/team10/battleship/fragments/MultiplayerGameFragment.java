@@ -719,14 +719,13 @@ private View mView;
         public void onClick(View v) {
             if(previouslyClickedView!=null)
                 previouslyClickedView.setBackground(((BattleshipGameObject)previouslyClickedView.getTag()).getBackground(v));
-            if(!((BattleshipGameObject)v.getTag()).isHit() && !((BattleshipGameObject)v.getTag()).isShot()) {
+            if(!((BattleshipGameObject)v.getTag()).isHit() && !((BattleshipGameObject)v.getTag()).isShot()&& myTurn) {
                 previouslyClickedView = v;
                 v.setBackground(v.getResources().getDrawable(R.drawable.selected));
-                if(myTurn)
-                {
+
                     Button shoot = (Button) mView.findViewById(R.id.btnShoot);
                     shoot.setEnabled(true);
-                }
+
                 has_selected = true;
             }
             else{
