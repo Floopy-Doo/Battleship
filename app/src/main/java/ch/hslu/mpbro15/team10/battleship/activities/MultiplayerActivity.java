@@ -29,8 +29,6 @@ import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
 import com.google.android.gms.plus.Plus;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -131,7 +129,7 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
     }
 
     @Override
-    public void onStop() {
+    public void onPause() {
         playRoomManager.leaveRoom();
         disableKeepScreenOn();
 
@@ -140,7 +138,7 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
         } else {
             showWaitingFragment();
         }
-        super.onStop();
+        super.onPause();
     }
 
 
@@ -167,12 +165,14 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
         } else if (requestCode == RC_PLAYER_INVITATION
                 && resultCode == RESULT_OK) {
             Log.d(this.getClass().getName(), "Select players UI succeeded.");
+            showWaitingFragment();
             playRoomManager.setUpGameRoom(
                     data.getStringArrayListExtra(Games.EXTRA_PLAYER_IDS),
                     data.getIntExtra(Multiplayer.EXTRA_MIN_AUTOMATCH_PLAYERS, 0),
                     data.getIntExtra(Multiplayer.EXTRA_MAX_AUTOMATCH_PLAYERS, 0));
         } else if (requestCode == BaseMultiplayerAcitvity.RC_SEE_INVITATIONS
                 && resultCode == RESULT_OK) {
+            showWaitingFragment();
             Invitation inv = data.getExtras().getParcelable(Multiplayer.EXTRA_INVITATION);
             playRoomManager.acceptInvite(inv.getInvitationId());
         } else if (requestCode == RC_WAITING_ROOM && resultCode == RESULT_OK) {
