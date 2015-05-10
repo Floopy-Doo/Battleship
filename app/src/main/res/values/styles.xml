@@ -231,6 +231,31 @@
         <item name="android:layout_marginTop">40dp</item>
     </style>
 
+    <style name="highscore_item">
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">15dp</item>
+    </style>
+
+    <style name="highscore_item.score">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:gravity">end</item>
+    </style>
+
+    <style name="highscore_item.date">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="highscore_item.place">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">60dp</item>
+        <item name="android:layout_marginLeft">60dp</item>
+    </style>
 
 
 </resources>
