@@ -63,4 +63,5 @@
     <string name="highscore_header_date">Date of score</string>
     <string name="highscore_header_score">Score</string>
     <string name="highscore_header_place">Place</string>
+    <string name="game_opponent_left">Sorry, opponent player has left the game!</string>
 </resources>

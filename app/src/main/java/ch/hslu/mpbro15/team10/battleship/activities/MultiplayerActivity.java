@@ -26,7 +26,6 @@ import com.google.android.gms.games.multiplayer.realtime.Room;
 import com.google.android.gms.games.multiplayer.realtime.RoomConfig;
 import com.google.android.gms.games.multiplayer.realtime.RoomStatusUpdateListener;
 import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
-import com.google.android.gms.plus.Plus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,31 +55,26 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
     public final GooglePlayRoomManager playRoomManager = new GooglePlayRoomManager(playConManager, playMsgManager);
     public boolean myTurn;
 
-    public String getCurrentRoomId()
-    {
+    public String getCurrentRoomId() {
         return playRoomManager.currentRoom.getRoomId();
     }
 
     public BattleshipGrid mMyGrid;
     public BattleshipGrid mEnemyGrid;
 
-    public Participant getEnemy()
-    {
+    public Participant getEnemy() {
         Participant enemy = null;
-        for(Participant p:playRoomManager.roomParticipiants)
-        {
-            if(!p.getParticipantId().equals(playRoomManager.currentPlayerID))
-            enemy = p;
+        for (Participant p : playRoomManager.roomParticipiants) {
+            if (!p.getParticipantId().equals(playRoomManager.currentPlayerID))
+                enemy = p;
         }
         return enemy;
     }
 
-    public Participant getMe()
-    {
+    public Participant getMe() {
         Participant me = null;
-        for(Participant p:playRoomManager.roomParticipiants)
-        {
-            if(p.getParticipantId().equals(playRoomManager.currentPlayerID))
+        for (Participant p : playRoomManager.roomParticipiants) {
+            if (p.getParticipantId().equals(playRoomManager.currentPlayerID))
                 me = p;
         }
         return me;
@@ -91,6 +85,10 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiplayer);
+
+        showGameSetupFragment();
+
+        /*
         if (savedInstanceState == null && playConManager.isConnected()) {
             showSignedInFragment();
         } else {
@@ -111,10 +109,11 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
                         dismissInvitation();
                         playRoomManager.acceptInvite(playInvManager.dispayedInvId);
                     }
-                });
+                }); */
         mMyGrid = BattleshipGrid.prepareOwnGrid();
         mEnemyGrid = BattleshipGrid.prepareOpponentGrid();
-        playMsgManager.addListener(this);
+        /*
+        playMsgManager.addListener(this); */
     }
 
     @Override
@@ -129,16 +128,15 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
     }
 
     @Override
-    public void onPause() {
+    public void onStop() {
         playRoomManager.leaveRoom();
         disableKeepScreenOn();
-
-        if (playConManager.isConnected()) {
-            showSignedInFragment();
-        } else {
-            showWaitingFragment();
-        }
-        super.onPause();
+//        if (playConManager.isConnected()) {
+//            showSignedInFragment();
+//        } else {
+//            showWaitingFragment();
+//        }
+        super.onStop();
     }
 
 
@@ -151,8 +149,10 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
 
         if (keyCode == KeyEvent.KEYCODE_BACK && isGameScreen) {
             playRoomManager.leaveRoom();
+            showSignedInFragment();
             return true;
         }
+
         return super.onKeyDown(keyCode, e);
     }
 
@@ -178,10 +178,12 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
         } else if (requestCode == RC_WAITING_ROOM && resultCode == RESULT_OK) {
             // ready to start playing
             Log.d(this.getClass().getName(), "Starting game (waiting room returned OK).");
+            showWaitingFragment();
             perpareForGameStart();
         } else if (requestCode == RC_WAITING_ROOM &&
                 (resultCode == GamesActivityResultCodes.RESULT_LEFT_ROOM || resultCode == RESULT_CANCELED)) {
             playRoomManager.leaveRoom();
+            showSignedInFragment();
         }
     }
 
@@ -243,11 +245,11 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
 
     private void perpareForGameStart() {
 
-        if(playRoomManager.roomParticipiants.get(0).getParticipantId().equals(playRoomManager.currentPlayerID)) {
+        if (playRoomManager.roomParticipiants.get(0).getParticipantId().equals(playRoomManager.currentPlayerID)) {
             Random rn = new Random();
             int startingPlayersIndex = rn.nextInt(2);
 
-            TransferObject transferObject = new TransferObject("StartingPlayer",playRoomManager.roomParticipiants.get(startingPlayersIndex).getParticipantId());
+            TransferObject transferObject = new TransferObject("StartingPlayer", playRoomManager.roomParticipiants.get(startingPlayersIndex).getParticipantId());
 
             byte[] mMsgBuf = ByteTransferObjectCoder.encodeTransferObject(transferObject);
 
@@ -275,11 +277,9 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
         String sender = rtm.getSenderParticipantId();
         TransferObject transferObject = ByteTransferObjectCoder.decodeTransferObject(buf);
 
-        if(transferObject.getType().equals("StartingPlayer"))
-        {
-            if(transferObject.getMessage().equals(playRoomManager.currentPlayerID))
-            {
-                myTurn=true;
+        if (transferObject.getType().equals("StartingPlayer")) {
+            if (transferObject.getMessage().equals(playRoomManager.currentPlayerID)) {
+                myTurn = true;
             }
         }
     }
@@ -442,9 +442,9 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
             Log.d(this.getClass().getName(), "Creating room done, waiting for it to be ready...");
         }
 
-        private void updateRoom(Room room) {
-            if (currentRoom.getRoomId() == room.getRoomId()) {
-                roomParticipiants = room.getParticipants();
+        public void leaveRoom() {
+            if (currentRoom != null) {
+                Games.RealTimeMultiplayer.leave(connectionManager.client, this, currentRoom.getRoomId());
             }
         }
 
@@ -454,9 +454,16 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
             MultiplayerActivity.this.startActivityForResult(intent, RC_WAITING_ROOM);
         }
 
-        public void leaveRoom() {
+        private void updateRoom(Room room) {
+            if (currentRoom != null && currentRoom.getRoomId() == room.getRoomId()) {
+                roomParticipiants = room.getParticipants();
+            }
+        }
+
+        private void opponentLeftRoom(Room room) {
             if (currentRoom != null) {
-                Games.RealTimeMultiplayer.leave(connectionManager.client, this, currentRoom.getRoomId());
+                currentRoom = null;
+                MultiplayerActivity.this.showGameError(getString(R.string.game_opponent_left));
             }
         }
 
@@ -477,7 +484,8 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
 
         @Override
         public void onPeerDeclined(Room room, List<String> strings) {
-            updateRoom(room);
+            Log.e(this.getClass().getName(), "Opponent declined the game.");
+            opponentLeftRoom(room);
         }
 
         @Override
@@ -487,8 +495,10 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
 
         @Override
         public void onPeerLeft(Room room, List<String> strings) {
-            updateRoom(room);
+            Log.e(this.getClass().getName(), "Opponent left the game.");
+            opponentLeftRoom(room);
         }
+
 
         @Override
         public void onConnectedToRoom(Room room) {
@@ -505,19 +515,32 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
 
         @Override
         public void onDisconnectedFromRoom(Room room) {
-            currentRoom = null;
             Log.e(this.getClass().getName(), "Disconnected from room.");
-            MultiplayerActivity.this.showGameError(getString(R.string.game_problem));
+            opponentLeftRoom(room);
         }
 
+        /**
+         * Called when all players has successfully connected to the room
+         *
+         * @param room
+         * @param peers
+         */
         @Override
-        public void onPeersConnected(Room room, List<String> strings) {
-            updateRoom(room);
+        public void onPeersConnected(Room room, List<String> peers) {
+            if (peers.size() >= ROOM_MIN_PLAYERS) {
+                // define current room
+                currentRoom = room;
+                updateRoom(room);
+            } else {
+                Log.e(this.getClass().getName(), "Not enought player to play the game, something went wrong!");
+                MultiplayerActivity.this.showGameError(getString(R.string.game_problem));
+            }
         }
 
         @Override
         public void onPeersDisconnected(Room room, List<String> strings) {
-            updateRoom(room);
+            Log.e(this.getClass().getName(), "Player left early. Aborting Game.");
+            opponentLeftRoom(room);
         }
 
         @Override
@@ -552,7 +575,7 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
 
         @Override
         public void onLeftRoom(int status, String roomID) {
-            if (currentRoom.getRoomId() == roomID) {
+            if (currentRoom != null && currentRoom.getRoomId() == roomID) {
                 currentRoom = null;
                 MultiplayerActivity.this.showSignedInFragment();
             }
@@ -599,7 +622,7 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
                         showSignedInFragment();
                     }
                 })
-                .create();
+                .create().show();
     }
 
 
