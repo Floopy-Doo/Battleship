@@ -12,12 +12,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.multiplayer.Participant;
 import com.google.android.gms.games.multiplayer.realtime.RealTimeMessage;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -29,6 +31,12 @@ import ch.hslu.mpbro15.team10.battleship.activities.MessageListener;
 import ch.hslu.mpbro15.team10.battleship.activities.MultiplayerActivity;
 import ch.hslu.mpbro15.team10.battleship.model.BattleshipGameObject;
 import ch.hslu.mpbro15.team10.battleship.model.BattleshipInvalidPlacementException;
+import ch.hslu.mpbro15.team10.battleship.model.GOBattleship;
+import ch.hslu.mpbro15.team10.battleship.model.GOCarrier;
+import ch.hslu.mpbro15.team10.battleship.model.GODestroyer;
+import ch.hslu.mpbro15.team10.battleship.model.GOMinecruiser;
+import ch.hslu.mpbro15.team10.battleship.model.GOSubmarine;
+import ch.hslu.mpbro15.team10.battleship.model.GOWater;
 import ch.hslu.mpbro15.team10.battleship.utility.ByteTransferObjectCoder;
 import ch.hslu.mpbro15.team10.battleship.utility.MyShadowBuilder;
 import ch.hslu.mpbro15.team10.battleship.utility.TransferObject;
@@ -136,11 +144,11 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
     private void setupGame(View view)
     {
         try {
-        mActivity.mMyGrid.placeShip(0,0,0,1);
-        mActivity.mMyGrid.placeShip(1,0,1,1);
-        mActivity.mMyGrid.placeShip(2,0,2,1);
-        mActivity.mMyGrid.placeShip(3,0,3,1);
-        mActivity.mMyGrid.placeShip(4,0,4,1);
+        mActivity.mMyGrid.placeShip(1,0,0,1);
+        mActivity.mMyGrid.placeShip(3,0,1,1);
+        mActivity.mMyGrid.placeShip(5,0,2,1);
+        mActivity.mMyGrid.placeShip(7,0,3,1);
+        mActivity.mMyGrid.placeShip(9,0,4,1);
         } catch (BattleshipInvalidPlacementException e) {
             e.printStackTrace();
         }
@@ -559,7 +567,182 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 ClipData data = ClipData.newPlainText("", "");
-                View.DragShadowBuilder shadowBuilder = new MyShadowBuilder(view, new Point(view.getHeight()/2,view.getHeight()/2));
+                View shadow = null;
+                List<BattleshipGameObject> shipParts=null;
+
+                if(view.getTag() instanceof GOBattleship)
+                {
+                    GOBattleship goBattleship= (GOBattleship)view.getTag();
+                    String coordinates = goBattleship.getCoordinates();
+                    char a = coordinates.charAt(0);
+                    char b = coordinates.charAt(1);
+                    int x = Integer.parseInt(String.valueOf(a));
+                    int y = Integer.parseInt(String.valueOf(b));
+
+                    List<BattleshipGameObject> list = new ArrayList<>();
+                    for(int i=0;i<=9;i++)
+                    {
+                        if(mActivity.mMyGrid.getGrid()[i][y] instanceof GOBattleship)
+                        {
+                            list.add(mActivity.mMyGrid.getGrid()[i][y]);
+                        }
+                    }
+                    if(list.size()<goBattleship.getLength())
+                    {
+                        list.clear();
+                        for(int i=0;i<=9;i++)
+                        {
+                            if(mActivity.mMyGrid.getGrid()[x][i] instanceof GOBattleship)
+                            {
+                                list.add(mActivity.mMyGrid.getGrid()[x][i]);
+                            }
+                        }
+                    }
+
+                    shipParts= list;
+
+                    List<TextView> shipTextviews = new ArrayList<>();
+                    for(BattleshipGameObject bsgo:shipParts)
+                    {
+                        int idResource = mView.getResources().getIdentifier("grid" + bsgo.getCoordinates() , "id", "ch.hslu.mpbro15.team10.battleship");
+                        shipTextviews.add((TextView)mView.findViewById(idResource));
+                    }
+
+                }
+                if(view.getTag() instanceof GOCarrier)
+                {
+                    GOCarrier goCarries= (GOCarrier)view.getTag();
+                    String coordinates = goCarries.getCoordinates();
+                    char a = coordinates.charAt(0);
+                    char b = coordinates.charAt(1);
+                    int x = Integer.parseInt(String.valueOf(a));
+                    int y = Integer.parseInt(String.valueOf(b));
+
+                    List<BattleshipGameObject> list = new ArrayList<>();
+                    for(int i=0;i<=9;i++)
+                    {
+                        if(mActivity.mMyGrid.getGrid()[i][y] instanceof GOCarrier)
+                        {
+                            list.add(mActivity.mMyGrid.getGrid()[i][y]);
+                        }
+                    }
+                    if(list.size()<goCarries.getLength())
+                    {
+                        list.clear();
+                        for(int i=0;i<=9;i++)
+                        {
+                            if(mActivity.mMyGrid.getGrid()[x][i] instanceof GOCarrier)
+                            {
+                                list.add(mActivity.mMyGrid.getGrid()[x][i]);
+                            }
+                        }
+                    }
+
+                    shipParts= list;
+
+                }
+                if(view.getTag() instanceof GODestroyer)
+                {
+                    GODestroyer goDestroyer= (GODestroyer)view.getTag();
+                    String coordinates = goDestroyer.getCoordinates();
+                    char a = coordinates.charAt(0);
+                    char b = coordinates.charAt(1);
+                    int x = Integer.parseInt(String.valueOf(a));
+                    int y = Integer.parseInt(String.valueOf(b));
+
+                    List<BattleshipGameObject> list = new ArrayList<>();
+                    for(int i=0;i<=9;i++)
+                    {
+                        if(mActivity.mMyGrid.getGrid()[i][y] instanceof GODestroyer)
+                        {
+                            list.add(mActivity.mMyGrid.getGrid()[i][y]);
+                        }
+                    }
+                    if(list.size()<goDestroyer.getLength())
+                    {
+                        list.clear();
+                        for(int i=0;i<=9;i++)
+                        {
+                            if(mActivity.mMyGrid.getGrid()[x][i] instanceof GODestroyer)
+                            {
+                                list.add(mActivity.mMyGrid.getGrid()[x][i]);
+                            }
+                        }
+                    }
+
+                    shipParts= list;
+
+                }
+                if(view.getTag() instanceof GOMinecruiser)
+                {
+                    GOMinecruiser goMinecruiser= (GOMinecruiser)view.getTag();
+                    String coordinates = goMinecruiser.getCoordinates();
+                    char a = coordinates.charAt(0);
+                    char b = coordinates.charAt(1);
+                    int x = Integer.parseInt(String.valueOf(a));
+                    int y = Integer.parseInt(String.valueOf(b));
+
+                    List<BattleshipGameObject> list = new ArrayList<>();
+                    for(int i=0;i<=9;i++)
+                    {
+                        if(mActivity.mMyGrid.getGrid()[i][y] instanceof GOMinecruiser)
+                        {
+                            list.add(mActivity.mMyGrid.getGrid()[i][y]);
+                        }
+                    }
+                    if(list.size()<goMinecruiser.getLength())
+                    {
+                        list.clear();
+                        for(int i=0;i<=9;i++)
+                        {
+                            if(mActivity.mMyGrid.getGrid()[x][i] instanceof GOMinecruiser)
+                            {
+                                list.add(mActivity.mMyGrid.getGrid()[x][i]);
+                            }
+                        }
+                    }
+
+                    shipParts= list;
+
+                }
+                if(view.getTag() instanceof GOSubmarine)
+                {
+                    GOSubmarine goSubmarine= (GOSubmarine)view.getTag();
+                    String coordinates = goSubmarine.getCoordinates();
+                    char a = coordinates.charAt(0);
+                    char b = coordinates.charAt(1);
+                    int x = Integer.parseInt(String.valueOf(a));
+                    int y = Integer.parseInt(String.valueOf(b));
+
+                    List<BattleshipGameObject> list = new ArrayList<>();
+                    for(int i=0;i<=9;i++)
+                    {
+                        if(mActivity.mMyGrid.getGrid()[i][y] instanceof GOSubmarine)
+                        {
+                            list.add(mActivity.mMyGrid.getGrid()[i][y]);
+                        }
+                    }
+                    if(list.size()<goSubmarine.getLength())
+                    {
+                        list.clear();
+                        for(int i=0;i<=9;i++)
+                        {
+                            if(mActivity.mMyGrid.getGrid()[x][i] instanceof GOSubmarine)
+                            {
+                                list.add(mActivity.mMyGrid.getGrid()[x][i]);
+                            }
+                        }
+                    }
+
+                    shipParts= list;
+
+                }
+                if(view.getTag() instanceof GOWater)
+                {
+                    return false;
+                }
+
+                View.DragShadowBuilder shadowBuilder = new MyShadowBuilder(shadow, new Point(view.getHeight()/2,view.getHeight()/2));
                 view.startDrag(data, shadowBuilder, view,0);
                 //view.setVisibility(View.INVISIBLE);
                 return true;
@@ -603,6 +786,31 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
             }
             return true;
         }
+    }
+
+    private List<BattleshipGameObject> getShipparts(int x, int y,Type type,int length)
+    {
+        List<BattleshipGameObject> list = new ArrayList<>();
+        for(int i=0;i<=9;i++)
+        {
+            if(mActivity.mMyGrid.getGrid()[i][y].getClass()==type.getClass())
+            {
+                list.add(mActivity.mMyGrid.getGrid()[i][y]);
+            }
+        }
+        if(list.size()<length)
+        {
+            list.clear();
+            for(int i=0;i<=9;i++)
+            {
+                if(mActivity.mMyGrid.getGrid()[x][i].getClass()==type.getClass())
+                {
+                    list.add(mActivity.mMyGrid.getGrid()[x][i]);
+                }
+            }
+        }
+        return list;
+
     }
 
 }

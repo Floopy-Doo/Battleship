@@ -1,6 +1,7 @@
 package ch.hslu.mpbro15.team10.battleship.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by dave on 10.05.2015.
@@ -69,7 +70,7 @@ public final class BattleshipGrid {
             if (playground[x][y] instanceof GOWater) {
                 placedShip = getGO(type); //create new GO for each field
                 playground[x][y] = placedShip;
-                playground[x][y].setCoordinates(String.valueOf(x),String.valueOf(y));
+                playground[x][y].setCoordinates(String.valueOf(x), String.valueOf(y));
                 rollbackStore.add(new RollbackObject(x, y));
                 checkShipPlacing(placedShip, x, y, direction, true);
 
@@ -79,13 +80,13 @@ public final class BattleshipGrid {
                         switch (direction) {
                             case DIRECTION_HORIZONTAL:
                                 playground[x + l][y] = placedShip;
-                                playground[x + l][y].setCoordinates(String.valueOf(x),String.valueOf(y));
+                                playground[x + l][y].setCoordinates(String.valueOf(x), String.valueOf(y));
                                 rollbackStore.add(new RollbackObject(x + l, y));
                                 checkShipPlacing(placedShip, x + l, y, direction, false);
                                 break;
                             case DIRECTION_VERTICAL:
                                 playground[x][y + l] = placedShip;
-                                playground[x][y + l].setCoordinates(String.valueOf(x),String.valueOf(y));
+                                playground[x][y + l].setCoordinates(String.valueOf(x), String.valueOf(y));
                                 rollbackStore.add(new RollbackObject(x, y + l));
                                 checkShipPlacing(placedShip, x, y + l, direction, false);
                                 break;
@@ -128,7 +129,6 @@ public final class BattleshipGrid {
             allowed &= checkFieldIsShip(x, y - 1, placedShip.getClass());       //feld open
             allowed &= checkFieldIsWater(x, y + 1);                             //feld unten
         }
-        allowed=true;
         if (!allowed) {
             throw new BattleshipInvalidPlacementException("");
         }
