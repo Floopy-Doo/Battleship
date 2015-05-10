@@ -43,6 +43,7 @@ import ch.hslu.mpbro15.team10.battleship.fragments.MultiplayerSignedInFragment;
 import ch.hslu.mpbro15.team10.battleship.fragments.OnFragmentInteractionListener;
 import ch.hslu.mpbro15.team10.battleship.fragments.WaitingFragment;
 import ch.hslu.mpbro15.team10.battleship.googleplaybasegame.BaseGameUtils;
+import ch.hslu.mpbro15.team10.battleship.model.BattleshipGrid;
 import ch.hslu.mpbro15.team10.battleship.utility.ByteTransferObjectCoder;
 import ch.hslu.mpbro15.team10.battleship.utility.TransferObject;
 
@@ -62,6 +63,9 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
         return playRoomManager.currentRoom.getRoomId();
     }
 
+    public BattleshipGrid mMyGrid;
+    public BattleshipGrid mEnemyGrid;
+
     public Participant getEnemy()
     {
         Participant enemy = null;
@@ -72,6 +76,18 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
         }
         return enemy;
     }
+
+    public Participant getMe()
+    {
+        Participant me = null;
+        for(Participant p:playRoomManager.roomParticipiants)
+        {
+            if(p.getParticipantId().equals(playRoomManager.currentPlayerID))
+                me = p;
+        }
+        return me;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +114,8 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
                         playRoomManager.acceptInvite(playInvManager.dispayedInvId);
                     }
                 });
+        mMyGrid = BattleshipGrid.prepareOwnGrid();
+        mEnemyGrid = BattleshipGrid.prepareOpponentGrid();
     }
 
     @Override
@@ -198,7 +216,10 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
                 .commit();
     }
 
-    protected void showGameFragment() {
+    public void showGameFragment() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, MultiplayerGameFragment.newInstance())
+                .commit();
     }
 
     protected void showWaitingFragment() {
@@ -220,34 +241,6 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
     }
 
     private void perpareForGameStart() {
-        Collections.sort(playRoomManager.roomParticipiants, new Comparator<Participant>() {
-            @Override
-            public int compare(Participant lhs, Participant rhs) {
-                return lhs.getParticipantId().compareTo(rhs.getParticipantId());
-            }
-        });
-        if(playRoomManager.roomParticipiants.get(0).equals(playRoomManager.currentPlayerID))
-        {
-            Random rn = new Random();
-            int startingPlayersIndex = rn.nextInt(2);
-
-            TransferObject transferObject = new TransferObject("StartingPlayer",playRoomManager.roomParticipiants.get(startingPlayersIndex).getParticipantId());
-
-            byte[] buffer = ByteTransferObjectCoder.encodeTransferObject(transferObject);
-
-            for (Participant p : playRoomManager.roomParticipiants) {
-                if (p.getParticipantId().equals(playRoomManager.currentPlayerID))
-                    continue;
-                if (p.getStatus() != Participant.STATUS_JOINED)
-                    continue;
-
-                Games.RealTimeMultiplayer.sendReliableMessage(playConManager.client, null, buffer, playRoomManager.currentRoom.getRoomId(),p.getParticipantId());
-            }
-            if(playRoomManager.currentPlayerID.equals(transferObject.getMessage()))
-                myTurn = true;
-        }
-
-
         showGameSetupFragment();
     }
 

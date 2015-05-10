@@ -1,5 +1,8 @@
 package ch.hslu.mpbro15.team10.battleship.model;
 
+import android.graphics.drawable.Drawable;
+import android.view.View;
+
 import java.io.Serializable;
 
 /**
@@ -18,6 +21,7 @@ public abstract class BattleshipGameObject implements Serializable {
     public abstract int getLength();
     public abstract boolean isSunk();
     public abstract void shoot() ;
+    public abstract Drawable getBackground(View view);
 
     public boolean isHit() {
         return hit;

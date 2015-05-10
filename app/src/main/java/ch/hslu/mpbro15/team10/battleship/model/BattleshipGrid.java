@@ -49,9 +49,9 @@ public final class BattleshipGrid {
         return ownGrid;
     }
 
-    public static BattleshipGrid prepareOpponentGrid(BattleshipGameObject[][] synchGrid) {
+    public static BattleshipGrid prepareOpponentGrid() {
         if (opponentGrid == null) {
-            opponentGrid = new BattleshipGrid(synchGrid);
+            opponentGrid = new BattleshipGrid();
         }
         return opponentGrid;
     }
@@ -124,7 +124,7 @@ public final class BattleshipGrid {
             allowed &= checkFieldIsShip(x, y - 1, placedShip.getClass());       //feld open
             allowed &= checkFieldIsWater(x, y + 1);                             //feld unten
         }
-
+        allowed=true;
         if (!allowed) {
             throw new BattleshipInvalidPlacementException("");
         }
