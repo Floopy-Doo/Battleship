@@ -136,11 +136,11 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
     private void setupGame(View view)
     {
         try {
-        mActivity.mMyGrid.placeShip(5,0,0,1);
-        mActivity.mMyGrid.placeShip(6,0,1,1);
-        mActivity.mMyGrid.placeShip(7,0,2,1);
-        mActivity.mMyGrid.placeShip(8,0,3,1);
-        mActivity.mMyGrid.placeShip(9,0,4,1);
+        mActivity.mMyGrid.placeShip(0,0,0,1);
+        mActivity.mMyGrid.placeShip(1,0,1,1);
+        mActivity.mMyGrid.placeShip(2,0,2,1);
+        mActivity.mMyGrid.placeShip(3,0,3,1);
+        mActivity.mMyGrid.placeShip(4,0,4,1);
         } catch (BattleshipInvalidPlacementException e) {
             e.printStackTrace();
         }
