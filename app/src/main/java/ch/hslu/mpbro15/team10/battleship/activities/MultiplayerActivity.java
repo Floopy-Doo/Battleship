@@ -47,7 +47,7 @@ import ch.hslu.mpbro15.team10.battleship.model.BattleshipGrid;
 import ch.hslu.mpbro15.team10.battleship.utility.ByteTransferObjectCoder;
 import ch.hslu.mpbro15.team10.battleship.utility.TransferObject;
 
-public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFragmentInteractionListener {
+public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFragmentInteractionListener, MessageListener {
 
     /**
      * ConnectionHandler for the Google Play Api Connector
@@ -116,6 +116,7 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
                 });
         mMyGrid = BattleshipGrid.prepareOwnGrid();
         mEnemyGrid = BattleshipGrid.prepareOpponentGrid();
+        playMsgManager.addListener(this);
     }
 
     @Override
@@ -241,7 +242,46 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
     }
 
     private void perpareForGameStart() {
+
+        if(playRoomManager.roomParticipiants.get(0).getParticipantId().equals(playRoomManager.currentPlayerID)) {
+            Random rn = new Random();
+            int startingPlayersIndex = rn.nextInt(2);
+
+            TransferObject transferObject = new TransferObject("StartingPlayer",playRoomManager.roomParticipiants.get(startingPlayersIndex).getParticipantId());
+
+            byte[] mMsgBuf = ByteTransferObjectCoder.encodeTransferObject(transferObject);
+
+            // Send to every other participant.
+            for (Participant p : playRoomManager.roomParticipiants) {
+                if (p.getParticipantId().equals(playRoomManager.currentPlayerID))
+                    continue;
+                if (p.getStatus() != Participant.STATUS_JOINED)
+                    continue;
+
+                // it's an interim score notification, so we can use unreliable
+                Games.RealTimeMultiplayer.sendUnreliableMessage(playConManager.client, mMsgBuf, playRoomManager.currentRoom.getRoomId(),
+                        p.getParticipantId());
+
+            }
+            if (playRoomManager.currentPlayerID.equals(transferObject.getMessage()))
+                myTurn = true;
+        }
         showGameSetupFragment();
+    }
+
+    @Override
+    public void onMessageRecieved(RealTimeMessage rtm) {
+        byte[] buf = rtm.getMessageData();
+        String sender = rtm.getSenderParticipantId();
+        TransferObject transferObject = ByteTransferObjectCoder.decodeTransferObject(buf);
+
+        if(transferObject.getType().equals("StartingPlayer"))
+        {
+            if(transferObject.getMessage().equals(playRoomManager.currentPlayerID))
+            {
+                myTurn=true;
+            }
+        }
     }
 
     public class GooglePlayConnectionManager implements

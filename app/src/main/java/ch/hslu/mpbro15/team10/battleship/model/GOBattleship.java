@@ -59,4 +59,15 @@ public class GOBattleship extends BattleshipGameObject {
             return view.getResources().getDrawable(R.drawable.hit);
         return view.getResources().getDrawable(R.drawable.ship);
     }
+
+    private String coordinates;
+    @Override
+    public void setCoordinates(String x, String y) {
+        coordinates = x+y;
+    }
+
+    @Override
+    public String getCoordinates() {
+        return coordinates;
+    }
 }

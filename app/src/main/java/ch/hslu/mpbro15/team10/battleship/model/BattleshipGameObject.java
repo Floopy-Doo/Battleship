@@ -38,4 +38,8 @@ public abstract class BattleshipGameObject implements Serializable {
     public void shot() {
         shot = true;
     }
+
+    public abstract void setCoordinates(String x, String y);
+
+    public abstract String getCoordinates();
 }

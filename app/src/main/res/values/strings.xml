@@ -52,6 +52,10 @@
     <string name="opponentStatusReady">Opponent ready</string>
     <string name="opponentStatusPlacingShip">Opponent placing ship</string>
     <string name="turnYou">Your turn</string>
+    <string name="turnEnemy">Enemy turn</string>
+    <string name="YouWon">You Won</string>
+    <string name="YouLose">You Lose</string>
+    <string name="waitingForOponent">Waiting for oponent...</string>
     <string name="GooglePlayBlurb">GooglePlay is required for multiplayer.</string>
     <string name="title_activity_game_setup">GameSetupActivity</string>
     <string name="title_activity_game">GameActivity</string>

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.games.Games;
 import com.google.android.gms.games.multiplayer.realtime.RealTimeMessage;
 
 import ch.hslu.mpbro15.team10.battleship.R;
@@ -60,11 +61,25 @@ private View mView;
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
         Button shoot = (Button) view.findViewById(R.id.btnShoot);
+        final TextView gameStatus = (TextView)view.findViewById(R.id.gameStatus);
+        if(mActivity.myTurn)
+        {
+            gameStatus.setText(getString(R.string.turnYou));
+        }
+        else
+        {
+            gameStatus.setText(getString(R.string.turnEnemy));
+        }
         shoot.setEnabled(mActivity.myTurn);
         shoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                myTurn = false;
+                Button shoot = (Button) mView.findViewById(R.id.btnShoot);
+                shoot.setEnabled(myTurn);
+                gameStatus.setText(getString(R.string.turnEnemy));
+                TransferObject transferObject = new TransferObject("Shoot",((BattleshipGameObject)previouslyClickedView.getTag()).getCoordinates());
+                Games.RealTimeMultiplayer.sendReliableMessage(mActivity.playConManager.client,null,ByteTransferObjectCoder.encodeTransferObject(transferObject),mActivity.getCurrentRoomId(),mActivity.getEnemy().getParticipantId());
             }
         });
         mView = view;
@@ -98,11 +113,61 @@ private View mView;
 
         if(transferObject.getType().equals("Miss"))
         {
-
+            View oponentGrid = mView.findViewById(R.id.gridOpponent);
+            int idResource = oponentGrid.getResources().getIdentifier("grid" + transferObject.getMessage(), "id", "ch.hslu.mpbro15.team10.battleship");
+            TextView textView = (TextView)oponentGrid.findViewById(idResource);
+            BattleshipGameObject bsGo = (BattleshipGameObject)textView.getTag();
+            bsGo.shot();
+            textView.setBackground(bsGo.getBackground(oponentGrid));
         }
 
         if(transferObject.getType().equals("Hit"))
         {
+            View oponentGrid = mView.findViewById(R.id.gridOpponent);
+            int idResource = oponentGrid.getResources().getIdentifier("grid" + transferObject.getMessage(), "id", "ch.hslu.mpbro15.team10.battleship");
+            TextView textView = (TextView)oponentGrid.findViewById(idResource);
+            BattleshipGameObject bsGo = (BattleshipGameObject)textView.getTag();
+            bsGo.hit();
+            textView.setBackground(bsGo.getBackground(oponentGrid));
+        }
+        if(transferObject.getType().equals("Shoot"))
+        {
+            View myGrid = mView.findViewById(R.id.gridYou);
+            int idResource = myGrid.getResources().getIdentifier("grid" + transferObject.getMessage(), "id", "ch.hslu.mpbro15.team10.battleship");
+            TextView textView = (TextView)myGrid.findViewById(idResource);
+            BattleshipGameObject bsGo = (BattleshipGameObject)textView.getTag();
+            bsGo.shoot();
+            textView.setBackground(bsGo.getBackground(myGrid));
+                if(bsGo.isHit())
+                {
+                    TransferObject answerTransferObject = new TransferObject("Hit",transferObject.getMessage());
+                    Games.RealTimeMultiplayer.sendReliableMessage(mActivity.playConManager.client,null,ByteTransferObjectCoder.encodeTransferObject(answerTransferObject),mActivity.getCurrentRoomId(),mActivity.getEnemy().getParticipantId());
+                    if(mActivity.mMyGrid.isAllSunk())
+                    {
+                        TransferObject finalTransferObject = new TransferObject("YouWin","Congrats!");
+                        Games.RealTimeMultiplayer.sendReliableMessage(mActivity.playConManager.client,null,ByteTransferObjectCoder.encodeTransferObject(answerTransferObject),mActivity.getCurrentRoomId(),mActivity.getEnemy().getParticipantId());
+                        TextView gameStatus = (TextView)mView.findViewById(R.id.gameStatus);
+
+                        gameStatus.setText(getString(R.string.YouLose));
+                    }
+                }
+            else
+                {
+                    TransferObject answerTransferObject = new TransferObject("Miss",transferObject.getMessage());
+                    Games.RealTimeMultiplayer.sendReliableMessage(mActivity.playConManager.client,null,ByteTransferObjectCoder.encodeTransferObject(answerTransferObject),mActivity.getCurrentRoomId(),mActivity.getEnemy().getParticipantId());
+                }
+            myTurn = true;
+            TextView gameStatus = (TextView)mView.findViewById(R.id.gameStatus);
+
+            gameStatus.setText(getString(R.string.turnYou));
+            Button shoot = (Button) mView.findViewById(R.id.btnShoot);
+            shoot.setEnabled(myTurn);
+        }
+        if(transferObject.getType().equals("YouWin"))
+        {
+             TextView gameStatus = (TextView)mView.findViewById(R.id.gameStatus);
+
+                gameStatus.setText(getString(R.string.YouWon));
 
         }
     }

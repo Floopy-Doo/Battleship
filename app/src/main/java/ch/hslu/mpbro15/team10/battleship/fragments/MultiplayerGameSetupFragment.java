@@ -46,6 +46,7 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
     private MultiplayerActivity mActivity = (MultiplayerActivity) getActivity();
     private boolean mReady;
     private boolean mEnemyReady;
+    private View mView;
 
     /**
      * Use this factory method to create a new instance of
@@ -74,13 +75,14 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_game_setup, container, false);
+        mView = view;
         Button ready = (Button) view.findViewById(R.id.btnReady);
-        determineStartingPlayer();
         ready.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Games.RealTimeMultiplayer.sendReliableMessage(mActivity.playConManager.client,null, ByteTransferObjectCoder.encodeTransferObject(new TransferObject("Ready","TRUE")),mActivity.getCurrentRoomId(),mActivity.getEnemy().getParticipantId());
                 mReady = true;
+                ((TextView)(mView.findViewById(R.id.textView2))).setText(getString(R.string.waitingForOponent));
                 if(mEnemyReady&&mReady)
                 {
                     mActivity.showGameFragment();
@@ -126,14 +128,6 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
             if(mEnemyReady&&mReady)
             {
                 mActivity.showGameFragment();
-            }
-        }
-
-        if(transferObject.getType().equals("StartingPlayer"))
-        {
-            if(transferObject.getMessage().equals(mActivity.getMe()))
-            {
-                mActivity.myTurn=true;
             }
         }
 
@@ -409,32 +403,4 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
         }
     }
 
-
-    private void determineStartingPlayer()
-    {
-        List<String> participants = new ArrayList<>();
-        participants.add(mActivity.getEnemy().getParticipantId());
-        participants.add(mActivity.getMe().getParticipantId());
-        Collections.sort(participants, new Comparator<String>() {
-            @Override
-            public int compare(String lhs, String rhs) {
-                return lhs.compareTo(rhs);
-            }
-        });
-        if(participants.get(0).equals(mActivity.getMe().getParticipantId()))
-        {
-            Random rn = new Random();
-            int startingPlayersIndex = rn.nextInt(2);
-
-            TransferObject transferObject = new TransferObject("StartingPlayer",participants.get(startingPlayersIndex));
-
-            byte[] buffer = ByteTransferObjectCoder.encodeTransferObject(transferObject);
-
-                Games.RealTimeMultiplayer.sendReliableMessage(mActivity.playConManager.client, null, buffer, mActivity.getCurrentRoomId(),mActivity.getEnemy().getParticipantId());
-
-            if(mActivity.getMe().getParticipantId().equals(transferObject.getMessage()))
-                mActivity.myTurn = true;
-        }
-
-    }
 }
