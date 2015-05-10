@@ -14,9 +14,14 @@ import android.widget.Toast;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.multiplayer.realtime.RealTimeMessage;
 
+import java.util.Date;
+
 import ch.hslu.mpbro15.team10.battleship.R;
 import ch.hslu.mpbro15.team10.battleship.activities.MessageListener;
 import ch.hslu.mpbro15.team10.battleship.activities.MultiplayerActivity;
+import ch.hslu.mpbro15.team10.battleship.data.DBHandler;
+import ch.hslu.mpbro15.team10.battleship.data.DBHelper;
+import ch.hslu.mpbro15.team10.battleship.data.HighscoreObject;
 import ch.hslu.mpbro15.team10.battleship.model.BattleshipGameObject;
 import ch.hslu.mpbro15.team10.battleship.utility.ByteTransferObjectCoder;
 import ch.hslu.mpbro15.team10.battleship.utility.TransferObject;
@@ -165,6 +170,9 @@ private View mView;
                         gameStatus.setText(getString(R.string.YouLose));
                         Context context = mView.getContext();
                         Toast.makeText(context,"You Lose",Toast.LENGTH_LONG).show();
+                        DBHandler dbHandler = new DBHandler(context);
+                        dbHandler.open();
+                        dbHandler.insertHighscore(new HighscoreObject(new Date(),number_of_shots));
                         return;
                     }
                 }
@@ -187,6 +195,10 @@ private View mView;
                 gameStatus.setText(getString(R.string.YouWon));
             Context context = mView.getContext();
             Toast.makeText(context,"You Win",Toast.LENGTH_LONG).show();
+            DBHandler dbHandler = new DBHandler(context);
+            dbHandler.open();
+            dbHandler.insertHighscore(new HighscoreObject(new Date(),number_of_shots));
+
 
         }
     }
