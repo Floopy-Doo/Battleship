@@ -607,6 +607,7 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
                         int idResource = mView.getResources().getIdentifier("grid" + bsgo.getCoordinates() , "id", "ch.hslu.mpbro15.team10.battleship");
                         shipTextviews.add((TextView)mView.findViewById(idResource));
                     }
+                    shadow = (View) mView.findViewById(R.id.Ship2);
 
                 }
                 if(view.getTag() instanceof GOCarrier)

@@ -47,6 +47,15 @@
 
 
     </LinearLayout>
+    <include
+        android:layout_width="300dp"
+        android:layout_height="280dp"
+        layout="@layout/ship_shadow"
+        android:layout_centerInParent="true"
+        android:id="@+id/gridOpponent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        />
 
     <Button
         android:layout_width="match_parent"
