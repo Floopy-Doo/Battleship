@@ -33,6 +33,7 @@ public final class BattleshipGrid {
         for (int x = 0; x < GRID_WIDHT; x++) {
             for (int y = 0; y < GRID_HEIGHT; y++) {
                 playground[x][y] = new GOWater();
+                playground[x][y].setCoordinates(String.valueOf(x),String.valueOf(y));
             }
         }
     }
@@ -68,6 +69,7 @@ public final class BattleshipGrid {
             if (playground[x][y] instanceof GOWater) {
                 placedShip = getGO(type); //create new GO for each field
                 playground[x][y] = placedShip;
+                playground[x][y].setCoordinates(String.valueOf(x),String.valueOf(y));
                 rollbackStore.add(new RollbackObject(x, y));
                 checkShipPlacing(placedShip, x, y, direction, true);
 
@@ -77,11 +79,13 @@ public final class BattleshipGrid {
                         switch (direction) {
                             case DIRECTION_HORIZONTAL:
                                 playground[x + l][y] = placedShip;
+                                playground[x + l][y].setCoordinates(String.valueOf(x),String.valueOf(y));
                                 rollbackStore.add(new RollbackObject(x + l, y));
                                 checkShipPlacing(placedShip, x + l, y, direction, false);
                                 break;
                             case DIRECTION_VERTICAL:
                                 playground[x][y + l] = placedShip;
+                                playground[x][y + l].setCoordinates(String.valueOf(x),String.valueOf(y));
                                 rollbackStore.add(new RollbackObject(x, y + l));
                                 checkShipPlacing(placedShip, x, y + l, direction, false);
                                 break;
