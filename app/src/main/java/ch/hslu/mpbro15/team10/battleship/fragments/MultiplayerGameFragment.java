@@ -157,7 +157,7 @@ private View mView;
                     if(mActivity.mMyGrid.isAllSunk())
                     {
                         TransferObject finalTransferObject = new TransferObject("YouWin","Congrats!");
-                        Games.RealTimeMultiplayer.sendReliableMessage(mActivity.playConManager.client,null,ByteTransferObjectCoder.encodeTransferObject(answerTransferObject),mActivity.getCurrentRoomId(),mActivity.getEnemy().getParticipantId());
+                        Games.RealTimeMultiplayer.sendReliableMessage(mActivity.playConManager.client,null,ByteTransferObjectCoder.encodeTransferObject(finalTransferObject),mActivity.getCurrentRoomId(),mActivity.getEnemy().getParticipantId());
                         TextView gameStatus = (TextView)mView.findViewById(R.id.gameStatus);
 
                         gameStatus.setText(getString(R.string.YouLose));
