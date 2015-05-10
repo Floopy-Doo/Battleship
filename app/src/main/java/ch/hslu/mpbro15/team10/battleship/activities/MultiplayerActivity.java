@@ -260,7 +260,7 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
                     continue;
 
                 // it's an interim score notification, so we can use unreliable
-                Games.RealTimeMultiplayer.sendUnreliableMessage(playConManager.client, mMsgBuf, playRoomManager.currentRoom.getRoomId(),
+                Games.RealTimeMultiplayer.sendReliableMessage(playConManager.client,null, mMsgBuf, playRoomManager.currentRoom.getRoomId(),
                         p.getParticipantId());
 
             }
