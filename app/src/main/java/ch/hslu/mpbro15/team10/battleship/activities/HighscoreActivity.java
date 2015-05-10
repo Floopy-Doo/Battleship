@@ -3,6 +3,7 @@ package ch.hslu.mpbro15.team10.battleship.activities;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,30 +50,41 @@ public class HighscoreActivity extends Activity {
     }
 
     private void loadListViewData() {
+        final String FIELD_PLACE = "PLACE";
+
         DBHandler dbHandler = new DBHandler(this);
         dbHandler.open();
-
 
         List<Map<String, String>> scores = new ArrayList<>();
         Cursor cur = dbHandler.getAllHighscoresCursor();
         if (cur.moveToFirst()) {
+            int place = 0;
             do {
                 Map<String, String> item = new HashMap<>();
                 Date date = new Date();
                 date.setTime(cur.getLong(cur.getColumnIndex(DBHandler.TABLE_HIGHSCORE_COLUMN_DATE)));
 
+                item.put(FIELD_PLACE, (++place) + ".");
                 item.put(DBHandler.TABLE_HIGHSCORE_COLUMN_DATE,
                         new SimpleDateFormat("dd.MM.yyyy hh:mm:ss").format(date));
                 item.put(DBHandler.TABLE_HIGHSCORE_COLUMN_SCORE,
                         "" + cur.getInt(cur.getColumnIndex(DBHandler.TABLE_HIGHSCORE_COLUMN_SCORE)));
                 scores.add(item);
             } while (cur.moveToNext());
+            Log.d(this.getClass().getSimpleName(),
+                    "DB data found. Filled list with " + scores.size() + " entries");
+        } else {
+            Map<String, String> item = new HashMap<>();
+            item.put(DBHandler.TABLE_HIGHSCORE_COLUMN_DATE, "No highscore yet.");
+            item.put(DBHandler.TABLE_HIGHSCORE_COLUMN_SCORE, "");
+            scores.add(item);
+            Log.d(this.getClass().getSimpleName(), "DB empty. Displaying no data item.");
         }
 
 
-        String[] fields = {DBHandler.TABLE_HIGHSCORE_COLUMN_DATE,
+        String[] fields = {FIELD_PLACE, DBHandler.TABLE_HIGHSCORE_COLUMN_DATE,
                 DBHandler.TABLE_HIGHSCORE_COLUMN_SCORE};
-        int[] viewIds = {R.id.scoreDate, R.id.scorePoints};
+        int[] viewIds = {R.id.scorePlace, R.id.scoreDate, R.id.scorePoints};
         ListView lvHigscores = (ListView) findViewById(R.id.highscoreList);
         lvHigscores.setAdapter(new SimpleAdapter(
                 this

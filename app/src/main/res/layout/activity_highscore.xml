@@ -11,13 +11,9 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        style="@style/GameTitle"
         android:layout_marginTop="60dp"
-        android:text="@string/title_activity_highscore"
-        android:theme="@style/GameTitle" />
+        android:text="@string/title_activity_highscore" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -25,41 +21,41 @@
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="0dp"
         android:orientation="vertical"
         android:layout_above="@+id/btnResetHighscores">
 
-        <RelativeLayout
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp">
+            android:gravity="right"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/scorePoints"
-                android:text="@string/highscore_header_date" />
+                android:id="@+id/scorePlace"
+                android:text="@string/highscore_header_place"
+                style="@style/highscore_item.place" />
 
             <TextView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="false"
-                android:gravity="end"
-                android:textAlignment="textEnd"
-                android:text="@string/highscore_header_score" />
-        </RelativeLayout>
+                android:text="@string/highscore_header_date"
+                style="@style/highscore_item.date" />
+
+            <TextView
+                android:text="@string/highscore_header_score"
+                style="@style/highscore_item.score" />
+
+        </LinearLayout>
+
 
         <ListView
             android:id="@+id/highscoreList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:background="@android:color/background_dark"
             android:headerDividersEnabled="true"
             android:nestedScrollingEnabled="true"
-            android:padding="1dp"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:smoothScrollbar="true" />/>
@@ -69,8 +65,8 @@
         android:id="@+id/btnResetHighscores"
         style="@style/MainScreenButton"
         android:text="reset highscores"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
