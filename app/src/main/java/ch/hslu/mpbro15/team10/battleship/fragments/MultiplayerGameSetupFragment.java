@@ -3,6 +3,7 @@ package ch.hslu.mpbro15.team10.battleship.fragments;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
+import android.content.Context;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -567,6 +568,8 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 ClipData data = ClipData.newPlainText("", "");
+                LayoutInflater inflater = (LayoutInflater)mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View tempView = inflater.inflate(R.layout.ship_shadow, (ViewGroup)mView, false);
                 View shadow = null;
                 List<BattleshipGameObject> shipParts=null;
 
@@ -607,7 +610,9 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
                         int idResource = mView.getResources().getIdentifier("grid" + bsgo.getCoordinates() , "id", "ch.hslu.mpbro15.team10.battleship");
                         shipTextviews.add((TextView)mView.findViewById(idResource));
                     }
-                    shadow = (View) mView.findViewById(R.id.Ship2);
+
+
+                    shadow = (View) tempView.findViewById(R.id.Ship2);
 
                 }
                 if(view.getTag() instanceof GOCarrier)
@@ -640,6 +645,14 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
                     }
 
                     shipParts= list;
+                    List<TextView> shipTextviews = new ArrayList<>();
+                    for(BattleshipGameObject bsgo:shipParts)
+                    {
+                        int idResource = mView.getResources().getIdentifier("grid" + bsgo.getCoordinates() , "id", "ch.hslu.mpbro15.team10.battleship");
+                        shipTextviews.add((TextView)mView.findViewById(idResource));
+                    }
+
+                    shadow = (View) tempView.findViewById(R.id.Ship1);
 
                 }
                 if(view.getTag() instanceof GODestroyer)
@@ -673,6 +686,15 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
 
                     shipParts= list;
 
+                    List<TextView> shipTextviews = new ArrayList<>();
+                    for(BattleshipGameObject bsgo:shipParts)
+                    {
+                        int idResource = mView.getResources().getIdentifier("grid" + bsgo.getCoordinates() , "id", "ch.hslu.mpbro15.team10.battleship");
+                        shipTextviews.add((TextView)mView.findViewById(idResource));
+                    }
+
+                    shadow = (View) tempView.findViewById(R.id.Ship3);
+
                 }
                 if(view.getTag() instanceof GOMinecruiser)
                 {
@@ -704,6 +726,15 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
                     }
 
                     shipParts= list;
+
+                    List<TextView> shipTextviews = new ArrayList<>();
+                    for(BattleshipGameObject bsgo:shipParts)
+                    {
+                        int idResource = mView.getResources().getIdentifier("grid" + bsgo.getCoordinates() , "id", "ch.hslu.mpbro15.team10.battleship");
+                        shipTextviews.add((TextView)mView.findViewById(idResource));
+                    }
+
+                    shadow = (View) tempView.findViewById(R.id.Ship5);
 
                 }
                 if(view.getTag() instanceof GOSubmarine)
@@ -737,13 +768,22 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
 
                     shipParts= list;
 
+                    List<TextView> shipTextviews = new ArrayList<>();
+                    for(BattleshipGameObject bsgo:shipParts)
+                    {
+                        int idResource = mView.getResources().getIdentifier("grid" + bsgo.getCoordinates() , "id", "ch.hslu.mpbro15.team10.battleship");
+                        shipTextviews.add((TextView)mView.findViewById(idResource));
+                    }
+
+                    shadow = (View) tempView.findViewById(R.id.Ship4);
+
                 }
                 if(view.getTag() instanceof GOWater)
                 {
                     return false;
                 }
 
-                View.DragShadowBuilder shadowBuilder = new MyShadowBuilder(shadow, new Point(view.getHeight()/2,view.getHeight()/2));
+                View.DragShadowBuilder shadowBuilder = new MyShadowBuilder(shadow, new Point(shadow.getHeight()/2,shadow.getHeight()/2));
                 view.startDrag(data, shadowBuilder, view,0);
                 //view.setVisibility(View.INVISIBLE);
                 return true;
