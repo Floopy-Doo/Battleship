@@ -26,6 +26,7 @@ import com.google.android.gms.games.multiplayer.realtime.Room;
 import com.google.android.gms.games.multiplayer.realtime.RoomConfig;
 import com.google.android.gms.games.multiplayer.realtime.RoomStatusUpdateListener;
 import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
+import com.google.android.gms.plus.Plus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,9 +87,6 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiplayer);
 
-        showGameSetupFragment();
-
-        /*
         if (savedInstanceState == null && playConManager.isConnected()) {
             showSignedInFragment();
         } else {
@@ -109,11 +107,11 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
                         dismissInvitation();
                         playRoomManager.acceptInvite(playInvManager.dispayedInvId);
                     }
-                }); */
+                });
         mMyGrid = BattleshipGrid.prepareOwnGrid();
         mEnemyGrid = BattleshipGrid.prepareOpponentGrid();
-        /*
-        playMsgManager.addListener(this); */
+
+        playMsgManager.addListener(this);
     }
 
     @Override
@@ -267,6 +265,9 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
             }
             if (playRoomManager.currentPlayerID.equals(transferObject.getMessage()))
                 myTurn = true;
+
+            mMyGrid.resetGrid();
+            mEnemyGrid.resetGrid();
         }
         showGameSetupFragment();
     }

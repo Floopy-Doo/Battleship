@@ -1,7 +1,6 @@
 package ch.hslu.mpbro15.team10.battleship.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by dave on 10.05.2015.
@@ -209,6 +208,16 @@ public final class BattleshipGrid {
         public RollbackObject(int x, int y) {
             this.x = x;
             this.y = y;
+        }
+    }
+
+    public void resetGrid() {
+        // fill grid with water
+        for (int x = 0; x < GRID_WIDHT; x++) {
+            for (int y = 0; y < GRID_HEIGHT; y++) {
+                playground[x][y] = new GOWater();
+                playground[x][y].setCoordinates(String.valueOf(x), String.valueOf(y));
+            }
         }
     }
 

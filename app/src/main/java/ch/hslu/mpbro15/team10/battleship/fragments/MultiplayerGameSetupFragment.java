@@ -2,12 +2,9 @@ package ch.hslu.mpbro15.team10.battleship.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,23 +16,14 @@ import com.google.android.gms.games.Games;
 import com.google.android.gms.games.multiplayer.realtime.RealTimeMessage;
 
 import java.lang.reflect.Type;
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import ch.hslu.mpbro15.team10.battleship.R;
 import ch.hslu.mpbro15.team10.battleship.activities.MessageListener;
 import ch.hslu.mpbro15.team10.battleship.activities.MultiplayerActivity;
 import ch.hslu.mpbro15.team10.battleship.model.BattleshipGameObject;
-import ch.hslu.mpbro15.team10.battleship.model.BattleshipGrid;
 import ch.hslu.mpbro15.team10.battleship.model.BattleshipInvalidPlacementException;
-import ch.hslu.mpbro15.team10.battleship.model.GOBattleship;
-import ch.hslu.mpbro15.team10.battleship.model.GOCarrier;
-import ch.hslu.mpbro15.team10.battleship.model.GODestroyer;
-import ch.hslu.mpbro15.team10.battleship.model.GOMinecruiser;
-import ch.hslu.mpbro15.team10.battleship.model.GOSubmarine;
-import ch.hslu.mpbro15.team10.battleship.model.GOWater;
 import ch.hslu.mpbro15.team10.battleship.utility.ByteTransferObjectCoder;
 import ch.hslu.mpbro15.team10.battleship.utility.TransferObject;
 
@@ -137,15 +125,24 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
     }
 
     private void setupGame(View view) {
-        try {
-            mActivity.mMyGrid.placeShip(1, 0, 0, 1);
-            mActivity.mMyGrid.placeShip(3, 0, 1, 1);
-            mActivity.mMyGrid.placeShip(5, 0, 2, 1);
-            mActivity.mMyGrid.placeShip(7, 0, 3, 1);
-            mActivity.mMyGrid.placeShip(9, 0, 4, 1);
-        } catch (BattleshipInvalidPlacementException e) {
-            e.printStackTrace();
+
+
+        // random ship placement
+        for (int shipType = 0; shipType < 5; shipType++) {
+            while (true) {
+                try {
+                    mActivity.mMyGrid.placeShip(
+                            (int) (Math.random() * 9),
+                            (int) (Math.random() * 9),
+                            shipType,
+                            (int) Math.round(Math.random()));
+                    break;
+                } catch (BattleshipInvalidPlacementException e) {
+                    Log.d(this.getClass().getSimpleName(), "Ship Placement failed, retry");
+                }
+            }
         }
+
 
         fillGrid(view, true);
     }
@@ -252,144 +249,13 @@ public class MultiplayerGameSetupFragment extends Fragment implements MessageLis
         view.findViewById(R.id.grid98).setTag(mActivity.mMyGrid.getGrid()[9][8]);
         view.findViewById(R.id.grid99).setTag(mActivity.mMyGrid.getGrid()[9][9]);
 
-
-        MyTouchListener touchListener = new MyTouchListener();
-        MyDragListener dragListener = new MyDragListener();
-
         TableLayout gameGrid = (TableLayout) view.findViewById(R.id.gridOpponent);
         for (int row = 0; row < gameGrid.getChildCount(); row++) {
             TableRow rowLayout = (TableRow) gameGrid.getChildAt(row);
             for (int cell = 0; cell < rowLayout.getChildCount(); cell++) {
                 TextView tvCell = (TextView) rowLayout.getChildAt(cell);
                 tvCell.setBackground(((BattleshipGameObject) tvCell.getTag()).getBackground(view));
-                if (addListener) {
-                    tvCell.setOnTouchListener(touchListener);
-                    tvCell.setOnDragListener(dragListener);
-                }
             }
-        }
-    }
-
-    private final class MyTouchListener implements View.OnTouchListener {
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                LayoutInflater inflater = (LayoutInflater)
-                        mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-                BattleshipGameObject gameObject = (BattleshipGameObject) view.getTag();
-                List<BattleshipGameObject> shipParts = new ArrayList<>();
-                Boolean horizontal = true;
-
-                if (gameObject instanceof GOWater) {
-                    return false;
-                } else {
-                    int posX = Integer.parseInt(String.valueOf(gameObject.getCoordinates().charAt(0)));
-                    int posY = Integer.parseInt(String.valueOf(gameObject.getCoordinates().charAt(1)));
-
-                    BattleshipGameObject[][] grid = mActivity.mMyGrid.getGrid();
-                    // Check vertical
-                    for (int gridX = 0; gridX < 10; gridX++) {
-                        if (grid[gridX][posY].getClass() == gameObject.getClass()) {
-                            shipParts.add(grid[gridX][posY]);
-                        }
-                    }
-
-                    // Check horizontal if not complete yet
-                    if (horizontal = shipParts.size() < gameObject.getLength()) {
-                        shipParts.clear();
-                        for (int gridY = 0; gridY <= 9; gridY++) {
-                            if (grid[posX][gridY].getClass() == gameObject.getClass()) {
-                                shipParts.add(grid[posX][gridY]);
-                            }
-                        }
-                    }
-
-                    // Get TextView based on ship parts
-                    List<TextView> shipTextViews = new ArrayList<>();
-                    for (BattleshipGameObject bsgo : shipParts) {
-                        int idResource = view.getResources().getIdentifier(
-                                "grid" + bsgo.getCoordinates(),
-                                "id",
-                                "ch.hslu.mpbro15.team10.battleship");
-                        shipTextViews.add((TextView) view.findViewById(idResource));
-                    }
-
-                    Map.Entry<Boolean, BattleshipGameObject> dragData =
-                            new AbstractMap.SimpleEntry<Boolean, BattleshipGameObject>(
-                                    horizontal,
-                                    gameObject
-                            );
-
-                    View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
-                    view.startDrag(null, shadowBuilder, dragData, 0);
-                    return true;
-                }
-            } else {
-                return false;
-            }
-        }
-    }
-
-    class MyDragListener implements View.OnDragListener {
-
-        @Override
-        public boolean onDrag(View v, DragEvent event) {
-            int action = event.getAction();
-            switch (event.getAction()) {
-                case DragEvent.ACTION_DRAG_STARTED:
-                    // do nothing
-                    break;
-                case DragEvent.ACTION_DRAG_ENTERED:
-                    //v.setBackgroundDrawable(enterShape);
-                    break;
-                case DragEvent.ACTION_DRAG_EXITED:
-                    //v.setBackgroundDrawable(normalShape);
-                    break;
-                case DragEvent.ACTION_DROP:
-
-                    // Dropped, reassign View to ViewGroup
-                    Map.Entry<Boolean, BattleshipGameObject> dragData =
-                            (Map.Entry<Boolean, BattleshipGameObject>) event.getLocalState();
-                    int posX = Integer.parseInt(String.valueOf(((BattleshipGameObject) v.getTag()).getCoordinates().charAt(0)));
-                    int posY = Integer.parseInt(String.valueOf(((BattleshipGameObject) v.getTag()).getCoordinates().charAt(1)));
-                    int shipType = 0;
-                    if (dragData.getValue() instanceof GOBattleship) {
-                        shipType = BattleshipGrid.SHIP_BATTLESHIP;
-                    } else if (dragData.getValue() instanceof GOCarrier) {
-                        shipType = BattleshipGrid.SHIP_CARRIER;
-                    } else if (dragData.getValue() instanceof GODestroyer) {
-                        shipType = BattleshipGrid.SHIP_DESTROYER;
-                    } else if (dragData.getValue() instanceof GOMinecruiser) {
-                        shipType = BattleshipGrid.SHIP_MINECRUISER;
-                    } else if (dragData.getValue() instanceof GOSubmarine) {
-                        shipType = BattleshipGrid.SHIP_SUBMARINE;
-                    }
-                    try {
-                        mActivity.mMyGrid.placeShip(
-                                posX, posY, shipType,
-                                dragData.getKey() ?
-                                        BattleshipGrid.DIRECTION_HORIZONTAL :
-                                        BattleshipGrid.DIRECTION_VERTICAL);
-
-                        fillGrid(getView(), false);
-                        getView().invalidate();
-                    } catch (BattleshipInvalidPlacementException bipe) {
-                        Log.e("", "Cant place ship there");
-                    }
-
-                    //ViewGroup owner = (ViewGroup) view.getParent();
-                    //owner.removeView(view);
-
-                    //LinearLayout container = (LinearLayout) v;
-                    //container.addView(view);
-                    //view.setVisibility(View.VISIBLE);
-                    break;
-                case DragEvent.ACTION_DRAG_ENDED:
-                    //v.setBackgroundDrawable(normalShape);
-                default:
-                    break;
-            }
-            return true;
         }
     }
 
