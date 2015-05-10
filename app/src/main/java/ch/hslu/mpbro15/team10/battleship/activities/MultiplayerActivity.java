@@ -244,6 +244,7 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
     private void perpareForGameStart() {
 
         if (playRoomManager.roomParticipiants.get(0).getParticipantId().equals(playRoomManager.currentPlayerID)) {
+            Log.d(this.getClass().getSimpleName(), "Find out how should start.");
             Random rn = new Random();
             int startingPlayersIndex = rn.nextInt(2);
 
@@ -265,10 +266,11 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
             }
             if (playRoomManager.currentPlayerID.equals(transferObject.getMessage()))
                 myTurn = true;
-
-            mMyGrid.resetGrid();
-            mEnemyGrid.resetGrid();
         }
+
+        Log.d(this.getClass().getSimpleName(), "Reseting grid and showing setup fragment.");
+        mMyGrid.resetGrid();
+        mEnemyGrid.resetGrid();
         showGameSetupFragment();
     }
 
