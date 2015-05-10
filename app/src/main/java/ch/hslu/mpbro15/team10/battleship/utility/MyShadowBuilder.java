@@ -1,8 +1,5 @@
 package ch.hslu.mpbro15.team10.battleship.utility;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
 import android.view.View;
@@ -23,22 +20,13 @@ public class MyShadowBuilder extends View.DragShadowBuilder {
     }
 
     @Override
-    public void onProvideShadowMetrics (Point size, Point touch) {
+    public void onProvideShadowMetrics(Point size, Point touch) {
         Log.d(this.getClass().getSimpleName(), "Shadow Point:" + touch);
-
-        // Set the shadow size :
-        size.set(getView().getWidth(), getView().getHeight());
-
-        // Sets the touch point's position to be in the middle of the drag shadow
-        touch.set(_offset.x, _offset.y);
-    }
-
-    @Override
-    public void onDrawShadow(Canvas canvas) {
-        Log.d(this.getClass().getSimpleName(), "Draw shadow");
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.RED);
-        canvas.drawCircle(20, 20, 20, paint);
+//
+//        // Set the shadow size :
+//        size.set(getView().getWidth(), getView().getHeight());
+//
+//        // Sets the touch point's position to be in the middle of the drag shadow
+//        touch.set(_offset.x, _offset.y);
     }
 }
