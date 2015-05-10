@@ -56,7 +56,6 @@
     <string name="title_activity_game_setup">GameSetupActivity</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="title_activity_multiplayer">MultiplayerActivity</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="highscore_header_date">Date of score</string>
+    <string name="highscore_header_score">Score</string>
 </resources>

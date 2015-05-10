@@ -25,8 +25,6 @@ import ch.hslu.mpbro15.team10.battleship.basegame.BaseMultiplayerAcitvity;
  * create an instance of this fragment.
  */
 public class MultiplayerSignedInFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -35,7 +33,6 @@ public class MultiplayerSignedInFragment extends Fragment {
      *
      * @return A new instance of fragment MultiplayerFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static MultiplayerSignedInFragment newInstance() {
         MultiplayerSignedInFragment fragment = new MultiplayerSignedInFragment();
         return fragment;

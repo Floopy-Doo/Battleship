@@ -30,7 +30,6 @@ public class MultiplayerSignInFragment extends Fragment {
      *
      * @return A new instance of fragment MultiplayerFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static MultiplayerSignInFragment newInstance() {
         MultiplayerSignInFragment fragment = new MultiplayerSignInFragment();
         return fragment;
