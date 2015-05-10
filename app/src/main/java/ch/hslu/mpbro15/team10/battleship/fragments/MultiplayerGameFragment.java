@@ -34,6 +34,8 @@ public class MultiplayerGameFragment extends Fragment implements MessageListener
     private MultiplayerActivity mActivity = (MultiplayerActivity) getActivity();
     private boolean myTurn;
     private View previouslyClickedView=null;
+    private int number_of_shots =0;
+    private boolean has_selected;
 
 private View mView;
     /**
@@ -77,12 +79,12 @@ private View mView;
         shoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                has_selected = false;
                 Button shoot = (Button) mView.findViewById(R.id.btnShoot);
                 gameStatus.setText(getString(R.string.turnEnemy));
                 TransferObject transferObject = new TransferObject("Shoot",((BattleshipGameObject)previouslyClickedView.getTag()).getCoordinates());
                 Games.RealTimeMultiplayer.sendReliableMessage(mActivity.playConManager.client,null,ByteTransferObjectCoder.encodeTransferObject(transferObject),mActivity.getCurrentRoomId(),mActivity.getEnemy().getParticipantId());
                 myTurn= false;
-                shoot.setEnabled(myTurn);
             }
         });
         mView = view;
@@ -176,7 +178,7 @@ private View mView;
 
             gameStatus.setText(getString(R.string.turnYou));
             Button shoot = (Button) mView.findViewById(R.id.btnShoot);
-            shoot.setEnabled(myTurn);
+            shoot.setEnabled(has_selected);
         }
         if(transferObject.getType().equals("YouWin"))
         {
@@ -722,6 +724,7 @@ private View mView;
                 v.setBackground(v.getResources().getDrawable(R.drawable.selected));
                 Button shoot = (Button) mView.findViewById(R.id.btnShoot);
                 shoot.setEnabled(true);
+                has_selected = true;
             }
             else{
                 v.setBackground(v.getResources().getDrawable(R.drawable.selected));
