@@ -49,7 +49,8 @@
     <string name="title_activity_highscore">High scores</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="opponentStatus">Opponent ready</string>
+    <string name="opponentStatusReady">Opponent ready</string>
+    <string name="opponentStatusPlacingShip">Opponent placing ship</string>
     <string name="turnYou">Your turn</string>
     <string name="GooglePlayBlurb">GooglePlay is required for multiplayer.</string>
     <string name="title_activity_game_setup">GameSetupActivity</string>

@@ -55,7 +55,23 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
     public final GooglePlayInvitationManager playInvManager = new GooglePlayInvitationManager();
     public final GooglePlayMessageManager playMsgManager = new GooglePlayMessageManager();
     public final GooglePlayRoomManager playRoomManager = new GooglePlayRoomManager(playConManager, playMsgManager);
+    public boolean myTurn;
 
+    public String getCurrentRoomId()
+    {
+        return playRoomManager.currentRoom.getRoomId();
+    }
+
+    public Participant getEnemy()
+    {
+        Participant enemy = null;
+        for(Participant p:playRoomManager.roomParticipiants)
+        {
+            if(!p.getParticipantId().equals(playRoomManager.currentPlayerID))
+            enemy = p;
+        }
+        return enemy;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,6 +193,9 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
     }
 
     protected void showGameSetupFragment() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, MultiplayerGameSetupFragment.newInstance())
+                .commit();
     }
 
     protected void showGameFragment() {
@@ -224,6 +243,8 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
 
                 Games.RealTimeMultiplayer.sendReliableMessage(playConManager.client, null, buffer, playRoomManager.currentRoom.getRoomId(),p.getParticipantId());
             }
+            if(playRoomManager.currentPlayerID.equals(transferObject.getMessage()))
+                myTurn = true;
         }
 
 
@@ -547,4 +568,6 @@ public class MultiplayerActivity extends BaseMultiplayerAcitvity implements OnFr
                 })
                 .create();
     }
+
+
 }

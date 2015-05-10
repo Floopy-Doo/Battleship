@@ -12,70 +12,70 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid00"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid01"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid02"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid03"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid04"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid05"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid06"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid07"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid08"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid09"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
 
@@ -89,70 +89,70 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid10"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid11"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid12"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid13"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid14"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid15"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid16"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid17"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid18"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid19"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
     </TableRow>
@@ -166,70 +166,70 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid20"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid21"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid22"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid23"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid24"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid25"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid26"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid27"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid28"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid29"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
 
@@ -244,70 +244,70 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid30"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid31"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid32"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid33"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid34"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid35"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid36"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid37"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid38"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid39"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
 
@@ -322,70 +322,70 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid40"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid41"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid42"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid43"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid44"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid45"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid46"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid47"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid48"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid49"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
 
@@ -400,70 +400,70 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid50"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid51"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid52"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid53"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid54"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid55"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid56"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid57"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid58"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid59"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
 
@@ -478,70 +478,70 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid60"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid61"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid62"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid63"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid64"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid65"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid66"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid67"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid68"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid69"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
 
@@ -556,70 +556,70 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid70"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid71"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid72"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid73"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid74"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid75"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid76"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid77"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid78"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid79"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
 
@@ -634,70 +634,70 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid80"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid81"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid82"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid83"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid84"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid85"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid86"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid87"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid88"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid89"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
 
@@ -712,70 +712,70 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid90"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid91"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid92"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid93"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid94"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid95"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid96"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid97"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid98"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:id="@+id/grid99"
-            android:background="@color/Game_Water"
+            android:background="@drawable/water"
             android:layout_weight="1"
             android:layout_margin="1dp" />
     </TableRow>
