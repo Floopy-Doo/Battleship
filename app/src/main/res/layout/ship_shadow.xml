@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_width="157.5dp"
+        android:layout_height="30dp"
+        android:layout_gravity="left|center_horizontal"
+        android:layout_weight="0.044"
+        android:id="@+id/Ship1">
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship1_1"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship1_2"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship1_3"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship1_4"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship1_5"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="126dp"
+        android:layout_height="30dp"
+        android:layout_gravity="left|center_horizontal"
+        android:layout_weight="0.044"
+        android:id="@+id/Ship2">
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship2_1"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship2_2"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship2_3"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship2_4"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="94.5dp"
+        android:layout_height="30dp"
+        android:layout_gravity="left|center_horizontal"
+        android:layout_weight="0.044"
+        android:id="@+id/Ship3">
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship3_1"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship3_2"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship3_3"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+
+
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="94.5dp"
+        android:layout_height="30dp"
+        android:layout_gravity="left|center_horizontal"
+        android:layout_weight="0.044"
+        android:id="@+id/Ship4">
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship4_1"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship4_2"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship4_3"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+
+
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="63dp"
+        android:layout_height="30dp"
+        android:layout_gravity="left|center_horizontal"
+        android:layout_weight="0.044"
+        android:id="@+id/Ship5">
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship5_1"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/Ship5_2"
+                android:background="@drawable/ship"
+                android:layout_weight="1"
+                android:text=" "
+                android:layout_margin="1dp" />
+
+
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>
