@@ -90,6 +90,8 @@ private View mView;
                 TransferObject transferObject = new TransferObject("Shoot",((BattleshipGameObject)previouslyClickedView.getTag()).getCoordinates());
                 Games.RealTimeMultiplayer.sendReliableMessage(mActivity.playConManager.client,null,ByteTransferObjectCoder.encodeTransferObject(transferObject),mActivity.getCurrentRoomId(),mActivity.getEnemy().getParticipantId());
                 myTurn= false;
+                shoot.setEnabled(myTurn);
+                number_of_shots++;
             }
         });
         mView = view;
@@ -170,9 +172,6 @@ private View mView;
                         gameStatus.setText(getString(R.string.YouLose));
                         Context context = mView.getContext();
                         Toast.makeText(context,"You Lose",Toast.LENGTH_LONG).show();
-                        DBHandler dbHandler = new DBHandler(context);
-                        dbHandler.open();
-                        dbHandler.insertHighscore(new HighscoreObject(new Date(),number_of_shots));
                         return;
                     }
                 }
